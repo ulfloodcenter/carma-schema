@@ -1,0 +1,202 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://floodcenter.louisiana.edu/CARMA.schema.20200709.json",
+  "title": "CARMA schema",
+  "description": "Data schema for Coastal Aquifer Research and Management Analytics (CARMA) Platform",
+  "type": "object"
+  "properties": {
+  	"HUC12Watersheds": {
+  		"type": "array",
+  		"items": { "$ref": "#/definitions/HUC12Watershed" }
+  	}
+  }
+  "definitions": {
+  	"HUC12Watershed": {
+  		"type": "object"
+  		"required": ["id", "description", "geometry", "area", "cropArea", "developedArea", "maxStreamOrder", "environmentalFlow"],
+  		"properties": {
+  			"id": {
+  				"type": "string",
+  				"description": "The ID of the HUC-12, e.g.: 111402010000"
+  			},
+  			"description": {
+  				"type": "string",
+  				"description": "A description for the HUC-12 watershed"
+  			},
+  			"geometry": {
+  				"$ref": "https://geojson.org/schema/Feature.json"
+  			},
+  			"area": {
+  				"type": "number",
+  				"description": "The total area of the HUC-12 watershed (unit: ha)"
+  			},
+  			"cropArea": {
+  				"type": "number",
+  				"description": "The crop area of the HUC-12 watershed (unit: ha)"
+  			},
+  			"developedArea": {
+  				"type": "number",
+  				"description": "The developer area of the HUC-12 watershed (unit: ha)"
+  			},
+  			"maxStreamOrder": {
+  				"type": "number",
+  				"description": "The maximum Strahler order of streams in the HUC-12 (unitless)"
+  			},
+  			"environmentalFlow": {
+  				"type": "number",
+  				"description": "Streamflow required for maintaining habitat suitability (unit: mm)"
+  			}
+  		}
+  	},
+  	"GroundWaterAvailabilityDataSet": {
+  		"type": "object",
+  		"required": ["huc12", "description", "sourceData", "year", "value", "unit"],
+  		"properties": {
+  			"huc12": {
+  				"type": "string",
+  				"description": "The ID of the HUC-12 watershed that this dataset is associated with"
+  			}
+  			"description": {
+  				"type": "string",
+  				"description": "A description of the ground water dataset"
+  			},
+  			"sourceData": {
+  				"type": "string",
+  				"description": "A URI referring to the original source of the dataset"
+  			},
+  			"year": {
+  				"type": "number",
+  				"description": "The year that the value of the dataset represents"
+  			},
+  			"value": {
+  				"type": "number",
+  				"description": "The datum that the dataset represents"
+  			},
+  			"unit": {
+  				"type": "string",
+  				"description": "The name of the Unit associated with this dataset"
+  			}
+  		}
+  	},
+  	"SurfaceWaterAvailabilityDataSet": {
+  		"type": "object",
+  		"required": ["huc12", "description", "sourceData", "year", "value", "unit"],
+  		"properties": {
+  			"huc12": {
+  				"type": "string",
+  				"description": "The ID of the HUC-12 watershed that this dataset is associated with"
+  			},
+  			"description": {
+  				"type": "string",
+  				"description": "A description of the ground water dataset"
+  			},
+  			"sourceData": {
+  				"type": "string",
+  				"description": "A URI referring to the original source of the dataset"
+  			},
+  			"year": {
+  				"type": "number",
+  				"description": "The year that the value of the dataset represents"
+  			},
+  			"value": {
+  				"type": "number",
+  				"description": "The datum that the dataset represents"
+  			},
+  			"unit": {
+  				"type": "string",
+  				"description": "The name of the Unit associated with this dataset"
+  			}
+  		}
+  	},
+  	"WaterUseDataSet": {
+  		"type": "object",
+  		"required": ["huc12", "useType", "sector", "description", "sourceData", "year", "value", "unit"],
+  		"properties": {
+  			"huc12": {
+  				"type": "string",
+  				"description": "The ID of the HUC-12 watershed that this dataset is associated with"
+  			},
+  			"useType": {
+  				"type": "string",
+  				"description": "The name of the UseType of the dataset (e.g. Surface Water, Ground Water)"
+  			},
+  			"sector": {
+  				"type": "string",
+  				"description": "The name of water use Sector associated with this dataset"
+  			},
+  			"sourceData": {
+  				"type": "string",
+  				"description": "A URI referring to the original source of the dataset"
+  			},
+  			"year": {
+  				"type": "number",
+  				"description": "The year that the value of the dataset represents"
+  			},
+  			"value": {
+  				"type": "number",
+  				"description": "The datum that the dataset represents"
+  			},
+  			"unit": {
+  				"type": "string",
+  				"description": "The name of the Unit associated with this dataset"
+  			}
+  		}
+  	}
+  	"Unit": {
+  		"type": "object",
+  		"required": ["name", "abbreviation", "primaryDimension", "secondaryDimension", "tertiaryDimension"]
+  		"properties": {
+  			"name": {
+  				"type": "string",
+  				"description": "The name of the unit"
+  			},
+  			"abbreviation": {
+  				"type": "string",
+  				"description": "The abbreviation of the unit"
+  			},
+  			"primaryDimension": {
+  				"type": "string",
+  				"description": "The name of the Dimension that is the primary dimension"
+  			},
+  			"secondaryDimension": {
+  				"type": "string",
+  				"description": "The name of the Dimension that is the secondary dimension"
+  			},
+  			"tertiaryDimension": {
+  				"type": "string",
+  				"description": "The name of the Dimension that is the tertiary dimension"
+  			}
+  		}
+  	},
+  	"Dimension": {
+  		"type": "object",
+  		"required": ["name"],
+  		"properties": {
+  			"name": {
+  				"type": "string",
+  				"enum": ["Millimeter", "Meter", "Hectare", "Liter", "Kilogram", "Kelvin", "Second", "Minute", "Hour", "Day", "Year"]
+  			}
+  		}
+  	},
+  	"UseType": {
+  		"type": "object",
+  		"required": ["name"],
+  		"properties": {
+  			"name": {
+  				"type": "string",
+  				"enum": ["Surface Water", "Group Water"]
+  			}
+  		}
+  	},
+  	"Sector": {
+  		"type": "object",
+  		"required": ["name"],
+  		"properties": {
+  			"name": {
+  				"type": "string",
+  				"enum": ["Public Supply", "Domestic", "Commercial", "Industrial", "Total Thermoelectric Power", "Fossil-fuel Thermoelectric Power", "Geothermal Thermoelectric Power", "Nuclear Thermoelectric Power", "Thermoelectric Power (Once-through cooling)", "Thermoelectric Power (Closed-loop cooling)", "Mining", "Livestock", "Livestock (Stock)", "Livestock (Animal Specialities)", "Aquaculture", "Irrigation, Total", "Irrigation, Crop", "Irrigation, Golf Courses", "Hydroelectric Power", "Wastewater Treatment"]
+  			}
+  		}
+  	}
+  }
+}
