@@ -3,16 +3,37 @@
   "$id": "https://floodcenter.louisiana.edu/CARMA.schema.20200709.json",
   "title": "CARMA schema",
   "description": "Data schema for Coastal Aquifer Research and Management Analytics (CARMA) Platform",
-  "type": "object"
+  "type": "object",
+  "required": ["HUC12Watersheds"],
   "properties": {
   	"HUC12Watersheds": {
   		"type": "array",
-  		"items": { "$ref": "#/definitions/HUC12Watershed" }
+  		"items": { "$ref": "#/definitions/HUC12Watershed" },
+  		"minItems": 1,
+      	"uniqueItems": true
+  	},
+  	"GroundWaterAvailabilityDatasets": {
+  		"type": "array",
+  		"items": { "$ref": "#/definitions/GroundWaterAvailabilityDataSet" },
+  		"minItems": 1,
+  		"uniqueItems": true
+  	},
+  	"SurfaceWaterAvailabilityDatasets": {
+		"type": "array",
+		"items": { "$ref": "#/definitions/SurfaceWaterAvailabilityDataset" },
+		"minItems": 1,
+		"uniqueItems": true
+  	},
+  	"WaterUseDatasets": {
+  		"type": "array",
+		"items": { "$ref": "#/definitions/WaterUseDataset" },
+		"minItems": 1,
+		"uniqueItems": true
   	}
-  }
+  },
   "definitions": {
   	"HUC12Watershed": {
-  		"type": "object"
+  		"type": "object",
   		"required": ["id", "description", "geometry", "area", "cropArea", "developedArea", "maxStreamOrder", "environmentalFlow"],
   		"properties": {
   			"id": {
@@ -48,37 +69,7 @@
   			}
   		}
   	},
-  	"GroundWaterAvailabilityDataSet": {
-  		"type": "object",
-  		"required": ["huc12", "description", "sourceData", "year", "value", "unit"],
-  		"properties": {
-  			"huc12": {
-  				"type": "string",
-  				"description": "The ID of the HUC-12 watershed that this dataset is associated with"
-  			}
-  			"description": {
-  				"type": "string",
-  				"description": "A description of the ground water dataset"
-  			},
-  			"sourceData": {
-  				"type": "string",
-  				"description": "A URI referring to the original source of the dataset"
-  			},
-  			"year": {
-  				"type": "number",
-  				"description": "The year that the value of the dataset represents"
-  			},
-  			"value": {
-  				"type": "number",
-  				"description": "The datum that the dataset represents"
-  			},
-  			"unit": {
-  				"type": "string",
-  				"description": "The name of the Unit associated with this dataset"
-  			}
-  		}
-  	},
-  	"SurfaceWaterAvailabilityDataSet": {
+  	"GroundWaterAvailabilityDataset": {
   		"type": "object",
   		"required": ["huc12", "description", "sourceData", "year", "value", "unit"],
   		"properties": {
@@ -108,7 +99,37 @@
   			}
   		}
   	},
-  	"WaterUseDataSet": {
+  	"SurfaceWaterAvailabilityDataset": {
+  		"type": "object",
+  		"required": ["huc12", "description", "sourceData", "year", "value", "unit"],
+  		"properties": {
+  			"huc12": {
+  				"type": "string",
+  				"description": "The ID of the HUC-12 watershed that this dataset is associated with"
+  			},
+  			"description": {
+  				"type": "string",
+  				"description": "A description of the ground water dataset"
+  			},
+  			"sourceData": {
+  				"type": "string",
+  				"description": "A URI referring to the original source of the dataset"
+  			},
+  			"year": {
+  				"type": "number",
+  				"description": "The year that the value of the dataset represents"
+  			},
+  			"value": {
+  				"type": "number",
+  				"description": "The datum that the dataset represents"
+  			},
+  			"unit": {
+  				"type": "string",
+  				"description": "The name of the Unit associated with this dataset"
+  			}
+  		}
+  	},
+  	"WaterUseDataset": {
   		"type": "object",
   		"required": ["huc12", "useType", "sector", "description", "sourceData", "year", "value", "unit"],
   		"properties": {
@@ -141,10 +162,10 @@
   				"description": "The name of the Unit associated with this dataset"
   			}
   		}
-  	}
+  	},
   	"Unit": {
   		"type": "object",
-  		"required": ["name", "abbreviation", "primaryDimension", "secondaryDimension", "tertiaryDimension"]
+  		"required": ["name", "abbreviation", "primaryDimension", "secondaryDimension", "tertiaryDimension"],
   		"properties": {
   			"name": {
   				"type": "string",
