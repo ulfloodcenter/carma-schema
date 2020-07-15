@@ -14,7 +14,7 @@
   	},
   	"GroundWaterAvailabilityDatasets": {
   		"type": "array",
-  		"items": { "$ref": "#/definitions/GroundWaterAvailabilityDataSet" },
+  		"items": { "$ref": "#/definitions/GroundWaterAvailabilityDataset" },
   		"minItems": 1,
   		"uniqueItems": true
   	},
@@ -94,8 +94,7 @@
   				"description": "The datum that the dataset represents"
   			},
   			"unit": {
-  				"type": "string",
-  				"description": "The name of the Unit associated with this dataset"
+  				"$ref": "#/definitions/Unit"
   			}
   		}
   	},
@@ -124,9 +123,8 @@
   				"description": "The datum that the dataset represents"
   			},
   			"unit": {
-  				"type": "string",
-  				"description": "The name of the Unit associated with this dataset"
-  			}
+				"$ref": "#/definitions/Unit"
+			}
   		}
   	},
   	"WaterUseDataset": {
@@ -138,13 +136,15 @@
   				"description": "The ID of the HUC-12 watershed that this dataset is associated with"
   			},
   			"useType": {
-  				"type": "string",
-  				"description": "The name of the UseType of the dataset (e.g. Surface Water, Ground Water)"
-  			},
+				"$ref": "#/definitions/UseType"	  
+			},
   			"sector": {
-  				"type": "string",
-  				"description": "The name of water use Sector associated with this dataset"
-  			},
+				"$ref": "#/definitions/Sector"	  
+			},
+			"description": {
+				"type": "string",
+				"description": "A description of the water use dataset"
+			},
   			"sourceData": {
   				"type": "string",
   				"description": "A URI referring to the original source of the dataset"
@@ -158,34 +158,30 @@
   				"description": "The datum that the dataset represents"
   			},
   			"unit": {
-  				"type": "string",
-  				"description": "The name of the Unit associated with this dataset"
-  			}
+				"$ref": "#/definitions/Unit"
+			}
   		}
   	},
   	"Unit": {
   		"type": "object",
-  		"required": ["name", "abbreviation", "primaryDimension", "secondaryDimension", "tertiaryDimension"],
+  		"required": ["name"],
   		"properties": {
   			"name": {
   				"type": "string",
-  				"description": "The name of the unit"
+  				"description": "The abbreviation of the unit."
   			},
-  			"abbreviation": {
+  			"description": {
   				"type": "string",
-  				"description": "The abbreviation of the unit"
+  				"description": "A more detailed description of the unit."
   			},
   			"primaryDimension": {
-  				"type": "string",
-  				"description": "The name of the Dimension that is the primary dimension"
+				"$ref": "#/definitions/Dimension"
   			},
   			"secondaryDimension": {
-  				"type": "string",
-  				"description": "The name of the Dimension that is the secondary dimension"
+				"$ref": "#/definitions/Dimension"
   			},
   			"tertiaryDimension": {
-  				"type": "string",
-  				"description": "The name of the Dimension that is the tertiary dimension"
+				"$ref": "#/definitions/Dimension"
   			}
   		}
   	},
@@ -195,7 +191,7 @@
   		"properties": {
   			"name": {
   				"type": "string",
-  				"enum": ["Millimeter", "Meter", "Hectare", "Liter", "Kilogram", "Kelvin", "Second", "Minute", "Hour", "Day", "Year"]
+  				"enum": ["Millimeter", "Meter", "Cubic meter", "Hectare", "Liter", "Million liter", "Kilogram", "Kelvin", "Second", "Minute", "Hour", "Day", "Year"]
   			}
   		}
   	},
@@ -205,7 +201,7 @@
   		"properties": {
   			"name": {
   				"type": "string",
-  				"enum": ["Surface Water", "Group Water"]
+  				"enum": ["Surface Water", "Ground Water"]
   			}
   		}
   	},
