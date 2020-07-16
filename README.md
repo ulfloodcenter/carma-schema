@@ -1,27 +1,41 @@
 # Testing validity of CARMA data against CARMA-schema
 
-## Install [`jsonschema`](https://github.com/Julian/jsonschema)
+## Installation
+
+First setup a virtual environment:
+- Using [venv](https://docs.python.org/3/library/venv.html)
+
+HTTPS:
 ```
-pip install jsonschema
+pip install git+https://bitbucket.org/watershedfloodcenter/carma-schema.git
 ```
 
-## Run tests from the command line
+> Note: You will need to enter your user ID and password
 
-Broken/invalid root structure of document:
+SSH:
 ```
-$ jsonschema -i test/fixtures/sample_carma_data_3_invalid.json src/schema/CARMA-schema-20200709.json 
-{'id': '080801030109', 'description': 'Anselm Coulee-Vermilion River', 'area': 14270.41780358217, 'cropArea': 4270.21704054178, 'developedArea': 270.4358217801704, 'maxStreamOrder': 5, 'environmentalFlow': 105}: 'HUC12Watersheds' is a required property
+pip install git+ssh://git@bitbucket.org/watershedfloodcenter/carma-schema.git
+```
+
+> Note: You will need to have [setup an SSH key](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) for this to work.
+
+## Usage
+
+Broken/invalid root structure of CARMA document:
+```
+$ carma-validator -s schema/CARMA-schema-20200709.json -d test/fixtures/sample_carma_data_3_missingHuc12.json 
+Validation of test/fixtures/sample_carma_data_3_missingHuc12.json against schema schema/CARMA-schema-20200709.json failed: 'HUC12Watersheds' is a required property
 ```
 
 Missing geometry field from HUC12Watersheds instance:
 ```
-$ jsonschema -i test/fixtures/sample_carma_data_2_broken.json src/schema/CARMA-schema-20200709.json
-{'id': '080801030109', 'description': 'Anselm Coulee-Vermilion River', 'area': 14270.41780358217, 'cropArea': 4270.21704054178, 'developedArea': 270.4358217801704, 'maxStreamOrder': 5, 'environmentalFlow': 105}: 'geometry' is a required property
+$ carma-validator -s schema/CARMA-schema-20200709.json -d test/fixtures/sample_carma_data_2_missingGeom.json
+Validation of test/fixtures/sample_carma_data_2_missingGeom.json against schema schema/CARMA-schema-20200709.json failed: 'geometry' is a required property
 ```
 
 Valid HUC12Watersheds instance:
 ```
-$ jsonschema -i test/fixtures/sample_carma_data_1.json src/schema/CARMA-schema-20200709.json
+$ carma-validator -s schema/CARMA-schema-20200709.json -d test/fixtures/Document test/fixtures/sample_carma_data_1.json appears to validate to schema schema/CARMA-schema-20200709.json.
 ```
 
 > i.e. no output=valid according to schema.
