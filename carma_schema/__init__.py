@@ -19,12 +19,8 @@ def validate(schema_path: str, document_path: str) -> (bool, dict):
         jsonschema.validate(document, schema)
         # import pdb; pdb.set_trace()
 
-        # Get list of HUC-12 defined in HUC12Watersheds
-        huc12_ids = [h['id'] for h in document['HUC12Watersheds']]
-        duplicates = find_duplicates(huc12_ids)
-        if len(duplicates):
-            return False, {"error": f"Duplicate HUC12Watersheds encountered: {duplicates}"}
-        huc12_ids = set(huc12_ids)
+        # Get set of HUC-12 defined in HUC12Watersheds (jsonschema and CARMA schema will make sure HUC12s are unique)
+        huc12_ids = {h['id'] for h in document['HUC12Watersheds']}
 
         # Get list of HUC-12 IDs from: GroundWaterAvailabilityDatasets,
         # SurfaceWaterAvailabilityDatasets, WaterUseDatasets
@@ -32,10 +28,10 @@ def validate(schema_path: str, document_path: str) -> (bool, dict):
         undef_huc12 = set()
         gwa_huc12s = [d['huc12'] for d in document['GroundWaterAvailabilityDatasets']]
         for g in gwa_huc12s:
-            if not g in huc12_ids:
+            if g not in huc12_ids:
                 undef_huc12.add(g)
         if len(undef_huc12):
-            return False, {"error", f"Undefined HUC12s encountered in GroundWaterAvailabilityDatasets: {undef_huc12}"}
+            return False, {"error": f"Undefined HUC12s encountered in GroundWaterAvailabilityDatasets: {undef_huc12}"}
 
         return True, {}
     except jsonschema.exceptions.SchemaError as e:
