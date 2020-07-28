@@ -1,9 +1,16 @@
 import json
-import sys
 
 import jsonschema
 
 from carma_schema.util import find_duplicates
+
+
+DATASET_TYPES = [
+    'GroundWaterAvailabilityDatasets',
+    'SurfaceWaterAvailabilityDatasets',
+    'WaterUseDatasets',
+    'GroundWaterAvailabilityDatasets'
+]
 
 
 def validate(schema_path: str, document_path: str) -> (bool, dict):
@@ -17,24 +24,29 @@ def validate(schema_path: str, document_path: str) -> (bool, dict):
 
     try:
         jsonschema.validate(document, schema)
-        # import pdb; pdb.set_trace()
+        # Create an error for higher-order validation errors after jsonschema validation
+        errors = []
 
         # Get set of HUC-12 defined in HUC12Watersheds (jsonschema and CARMA schema will make sure HUC12s are unique)
         huc12_ids = {h['id'] for h in document['HUC12Watersheds']}
 
-        # Get list of HUC-12 IDs from: GroundWaterAvailabilityDatasets,
+        # Make sure that HUC-12s references from: GroundWaterAvailabilityDatasets,
         # SurfaceWaterAvailabilityDatasets, WaterUseDatasets
-        # GroundWaterAvailabilityDatasets
-        undef_huc12 = set()
-        gwa_huc12s = [d['huc12'] for d in document['GroundWaterAvailabilityDatasets']]
-        for g in gwa_huc12s:
-            if g not in huc12_ids:
-                undef_huc12.add(g)
-        if len(undef_huc12):
-            return False, {"error": f"Undefined HUC12s encountered in GroundWaterAvailabilityDatasets: {undef_huc12}"}
+        # GroundWaterAvailabilityDatasets are actually defined.
+        for dataset_type in DATASET_TYPES:
+            undef_huc12 = set()
+            dataset_huc12s = [d['huc12'] for d in document[dataset_type]]
+            for huc in dataset_huc12s:
+                if huc not in huc12_ids:
+                    undef_huc12.add(huc)
+            if len(undef_huc12):
+                errors.append(f"Undefined HUC12s encountered in {dataset_type}: {undef_huc12}")
 
-        return True, {}
+        if len(errors) > 0:
+            return False, {'errors': errors}
+        else:
+            return True, {}
     except jsonschema.exceptions.SchemaError as e:
-        return False, {"error": e}
+        return False, {"errors": [e]}
     except jsonschema.exceptions.ValidationError as e:
-        return False, {"error": e}
+        return False, {"errors": [e]}
