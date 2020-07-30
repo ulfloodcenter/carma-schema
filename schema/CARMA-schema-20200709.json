@@ -49,22 +49,27 @@
   			},
   			"area": {
   				"type": "number",
+				"minimum": 1,
   				"description": "The total area of the HUC-12 watershed (unit: ha)"
   			},
   			"cropArea": {
   				"type": "number",
+				"minimum": 0,
   				"description": "The crop area of the HUC-12 watershed (unit: ha)"
   			},
   			"developedArea": {
   				"type": "number",
+				"minimum": 0,
   				"description": "The developer area of the HUC-12 watershed (unit: ha)"
   			},
   			"maxStreamOrder": {
-  				"type": "number",
+  				"type": "integer",
+				"minimum": 1,
   				"description": "The maximum Strahler order of streams in the HUC-12 (unitless)"
   			},
   			"environmentalFlow": {
   				"type": "number",
+				"minimum": 0,
   				"description": "Streamflow required for maintaining habitat suitability (unit: mm)"
   			}
   		}
@@ -86,12 +91,14 @@
   				"description": "A URI referring to the original source of the dataset"
   			},
   			"year": {
-  				"type": "number",
+  				"type": "integer",
+				"minimum": 1,
   				"description": "The year that the value of the dataset represents"
   			},
   			"value": {
   				"type": "number",
-  				"description": "The datum that the dataset represents"
+				"minimum": 0,
+  				"description": "The data value that the dataset represents"
   			},
   			"unit": {
   				"$ref": "#/definitions/Unit"
@@ -115,12 +122,14 @@
   				"description": "A URI referring to the original source of the dataset"
   			},
   			"year": {
-  				"type": "number",
+  				"type": "integer",
+				"minimum": 1,
   				"description": "The year that the value of the dataset represents"
   			},
   			"value": {
   				"type": "number",
-  				"description": "The datum that the dataset represents"
+				"minimum": 0,
+  				"description": "The data value that the dataset represents"
   			},
   			"unit": {
 				"$ref": "#/definitions/Unit"
@@ -150,12 +159,14 @@
   				"description": "A URI referring to the original source of the dataset"
   			},
   			"year": {
-  				"type": "number",
+  				"type": "integer",
+				"minimum": 1,
   				"description": "The year that the value of the dataset represents"
   			},
   			"value": {
   				"type": "number",
-  				"description": "The datum that the dataset represents"
+				"minimum": 0,
+  				"description": "The data value that the dataset represents"
   			},
   			"unit": {
 				"$ref": "#/definitions/Unit"
