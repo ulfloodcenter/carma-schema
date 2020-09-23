@@ -12,6 +12,12 @@
   		"minItems": 1,
       	"uniqueItems": true
   	},
+	"Counties": {
+		"type": "array",
+		"items": { "$ref": "#/definitions/County" },
+  		"minItems": 1,
+      	"uniqueItems": true
+	},
   	"GroundWaterAvailabilityDatasets": {
   		"type": "array",
   		"items": { "$ref": "#/definitions/GroundWaterAvailabilityDataset" },
@@ -44,9 +50,6 @@
   				"type": "string",
   				"description": "A description for the HUC-12 watershed"
   			},
-  			"geometry": {
-  				"$ref": "https://geojson.org/schema/Feature.json"
-  			},
   			"area": {
   				"type": "number",
 				"minimum": 1,
@@ -71,9 +74,60 @@
   				"type": "number",
 				"minimum": 0,
   				"description": "Streamflow required for maintaining habitat suitability (unit: mm)"
+  			},
+			"geometry": {
+  				"$ref": "https://geojson.org/schema/Polygon.json"
   			}
-  		}
+		}
   	},
+	"County": {
+		"type": "object",
+		"required": ["id", "state", "county", "area", "population"],
+		"properties": {
+			"id": {
+  				"type": "string",
+  				"description": "The ID of the county, in the format of state FIPS code following by county FIPS code, e.g. 22055"
+  			},
+			"state": {
+				"type": "string",
+				"description": "The full name of the state that county is in, e.g. 'Louisiana'."
+			},
+			"county": {
+				"type": "string",
+				"description": "The name of the county (not including the word 'County'), e.g. 'Lafayette'."
+			},
+			"area": {
+  				"type": "number",
+				"minimum": 1,
+  				"description": "The total area of the county (unit: square kilometers)"
+  			},
+			"population": {
+				"type": "array",
+				"items": { "$ref": "#/definitions/CountyPopulation" },
+				"minItems": 1,
+				"uniqueItems": true
+			},
+			"geometry": {
+  				"$ref": "https://geojson.org/schema/MultiPolygon.json"
+  			}
+		}
+	},
+	"CountyPopulation": {
+		"type": "object",
+		"required": ["year", "count"],
+		"properties": {
+			"year": {
+				"type": "integer",
+				"minimum": 1,
+				"description": "The year of the county population count."
+			},
+			"count": {
+				"type": "integer",
+				"minimum": 0,
+				"description": "The count, or estimated count, of people living in the county."
+			}
+		}
+	},
   	"GroundWaterAvailabilityDataset": {
   		"type": "object",
   		"required": ["huc12", "description", "sourceData", "year", "value", "unit"],
