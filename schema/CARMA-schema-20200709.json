@@ -62,10 +62,11 @@
 				"uniqueItems": true
 			},
   			"developedArea": {
-  				"type": "number",
-				"minimum": 0,
-  				"description": "The developer area of the HUC-12 watershed (unit: ha)"
-  			},
+				"type": "array",
+				"items": { "$ref": "#/definitions/DevelopedArea" },
+				"minItems": 1,
+				"uniqueItems": true
+			},
   			"maxStreamOrder": {
   				"type": "integer",
 				"minimum": 1,
@@ -97,6 +98,22 @@
 			},
 			"cropAreaDetail": {
 				"type": "object"
+			}
+		}
+	},
+	"DevelopedArea" : {
+		"type": "object",
+		"required": ["year", "area"],
+		"properties": {
+			"year": {
+				"type": "integer",
+				"minimum": 1,
+				"description": "The year of the developed area data."
+			},
+			"area": {
+				"type": "number",
+				"minimum": 0,
+				"description": "The developed area of the HUC-12 watershed (unit: square kilometers)"
 			}
 		}
 	},
