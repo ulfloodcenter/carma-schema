@@ -40,7 +40,7 @@
   "definitions": {
   	"HUC12Watershed": {
   		"type": "object",
-  		"required": ["id", "description", "geometry", "area", "cropArea", "developedArea", "maxStreamOrder", "environmentalFlow"],
+  		"required": ["id", "description", "geometry", "area", "crops", "developedArea", "maxStreamOrder", "meanAnnualFlow"],
   		"properties": {
   			"id": {
   				"type": "string",
@@ -55,11 +55,12 @@
 				"minimum": 1,
   				"description": "The total area of the HUC-12 watershed (unit: ha)"
   			},
-  			"cropArea": {
-  				"type": "number",
-				"minimum": 0,
-  				"description": "The crop area of the HUC-12 watershed (unit: ha)"
-  			},
+			"crops": {
+				"type": "array",
+				"items": { "$ref": "#/definitions/CropArea" },
+				"minItems": 1,
+				"uniqueItems": true
+			},
   			"developedArea": {
   				"type": "number",
 				"minimum": 0,
@@ -70,16 +71,35 @@
 				"minimum": 1,
   				"description": "The maximum Strahler order of streams in the HUC-12 (unitless)"
   			},
-  			"environmentalFlow": {
+  			"meanAnnualFlow": {
   				"type": "number",
 				"minimum": 0,
-  				"description": "Streamflow required for maintaining habitat suitability (unit: mm)"
+  				"description": "Mean annual streamflow (unit: mm)"
   			},
 			"geometry": {
   				"$ref": "https://geojson.org/schema/Polygon.json"
   			}
 		}
   	},
+	"CropArea": {
+		"type": "object",
+		"required": ["year", "cropArea"],
+		"properties": {
+			"year": {
+				"type": "integer",
+				"minimum": 1,
+				"description": "The year of the county population count."
+			},
+			"cropArea": {
+				"type": "number",
+				"minimum": 0,
+				"description": "The crop area of a HUC-12 watershed (unit: square kilometers)"
+			},
+			"cropAreaDetail": {
+				"type": "object"
+			}
+		}
+	},
 	"County": {
 		"type": "object",
 		"required": ["id", "state", "county", "area", "population"],
