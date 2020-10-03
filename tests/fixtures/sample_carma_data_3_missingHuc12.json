@@ -2,9 +2,18 @@
 	"id": "080801030109",
 	"description": "Anselm Coulee-Vermilion River",
 	"area": 14270.417803582170405,
-	"cropArea": 4270.217040541780358,
-	"developedArea": 270.435821780170405,
 	"maxStreamOrder": 5,
-	"environmentalFlow": 105
-
+	"meanAnnualFlow": 105,
+	"crops": [
+		{
+			"year": 2019,
+			"cropArea": 4270.217040541780358
+		}
+	],
+	"developedArea": [
+		{
+			"year": 2016,
+			"area": 270.435821780170405
+		}
+	]
 }

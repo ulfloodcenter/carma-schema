@@ -4,7 +4,7 @@
   "title": "CARMA schema",
   "description": "Data schema for Coastal Aquifer Research and Management Analytics (CARMA) Platform",
   "type": "object",
-  "required": ["HUC12Watersheds"],
+  "required": ["HUC12Watersheds", "Counties"],
   "properties": {
   	"HUC12Watersheds": {
   		"type": "array",
@@ -119,7 +119,7 @@
 	},
 	"County": {
 		"type": "object",
-		"required": ["id", "state", "county", "area", "population"],
+		"required": ["id", "state", "county", "area", "population", "geometry"],
 		"properties": {
 			"id": {
   				"type": "string",
