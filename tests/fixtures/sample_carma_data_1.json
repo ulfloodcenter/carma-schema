@@ -81,6 +81,20 @@
 				"primaryDimension": { "name": "Million liter" },
 				"secondaryDimension": { "name": "Day" }
 			}
+		},
+		{
+			"county":"22055",
+			"useType": { "name": "Ground Water" },
+			"sector": { "name": "Public Supply" },
+			"description": "Water use by public water utilities",
+			"sourceData": "https://waterdata.usgs.gov/la/nwis/water_use?format=rdb&rdb_compression=file&wu_area=County&wu_year=2015&wu_county=001&wu_category=PS&wu_county_nms=Acadia%2BParish&wu_category_nms=Public%2BSupply",
+			"year": 2015,
+			"value": 23.9,
+			"unit" : {
+				"name": "million liter/day",
+				"primaryDimension": { "name": "Million liter" },
+				"secondaryDimension": { "name": "Day" }
+			}
 		}
 	],
 	

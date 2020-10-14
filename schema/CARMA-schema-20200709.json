@@ -43,6 +43,7 @@
   		"required": ["id", "description", "geometry", "area", "crops", "developedArea", "maxStreamOrder", "meanAnnualFlow"],
   		"properties": {
   			"id": {
+				/* TODO: validate by pattern */
   				"type": "string",
   				"description": "The ID of the HUC-12, e.g.: 111402010000"
   			},
@@ -122,6 +123,7 @@
 		"required": ["id", "state", "county", "area", "population", "geometry"],
 		"properties": {
 			"id": {
+				/* TODO: validate by pattern */
   				"type": "string",
   				"description": "The ID of the county, in the format of state FIPS code following by county FIPS code, e.g. 22055"
   			},
@@ -229,11 +231,21 @@
   	},
   	"WaterUseDataset": {
   		"type": "object",
-  		"required": ["huc12", "useType", "sector", "description", "sourceData", "year", "value", "unit"],
+		"oneOf": [
+			{"required": ["huc12"]},
+			{"required": ["county"]}
+		],
+		"allOf": [
+			{"required": ["useType", "sector", "description", "sourceData", "year", "value", "unit"]}
+		],
   		"properties": {
   			"huc12": {
   				"type": "string",
   				"description": "The ID of the HUC-12 watershed that this dataset is associated with"
+  			},
+			"county": {
+  				"type": "string",
+  				"description": "The ID of the county, in the format of state FIPS code following by county FIPS code, e.g. 22055"
   			},
   			"useType": {
 				"$ref": "#/definitions/UseType"	  
