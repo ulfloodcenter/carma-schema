@@ -1,4 +1,5 @@
 import json
+from collections import Counter
 
 import jsonschema
 
@@ -28,7 +29,7 @@ def validate(schema_path: str, document_path: str) -> (bool, dict):
         errors.append(e)
 
     # Basic validation against schema failed, bail out before trying higher-order validation
-    # (i.e. validating that HUC12 references are correct)
+    # (e.g. validating that HUC12 references are correct)
     if len(errors) > 0:
         return False, {'errors': errors}
 
@@ -38,14 +39,30 @@ def validate(schema_path: str, document_path: str) -> (bool, dict):
         huc12_ids = set()
     else:
         huc12_present = True
-        huc12_ids = {h['id'] for h in document['HUC12Watersheds']}
+        huc12_ids_list = [h['id'] for h in document['HUC12Watersheds']]
+        huc12_ids_counter = Counter(huc12_ids_list)
+        duplicate_huc12s = []
+        for id in huc12_ids_counter:
+            if huc12_ids_counter[id] > 1:
+                duplicate_huc12s.append(id)
+        if len(duplicate_huc12s) > 0:
+            errors.append(f"Duplicate HUC12 watershed definitions found for: {duplicate_huc12s}")
+        huc12_ids = set(huc12_ids_list)
 
     if 'Counties' not in document:
         counties_present = False
         county_ids = set()
     else:
         counties_present = True
-        county_ids = {h['id'] for h in document['Counties']}
+        county_list = [h['id'] for h in document['Counties']]
+        county_counter = Counter(county_list)
+        duplicate_counties = []
+        for id in county_counter:
+            if county_counter[id] > 1:
+                duplicate_counties.append(id)
+        if len(duplicate_counties) > 0:
+            errors.append(f"Duplicate county definitions found for: {duplicate_counties}")
+        county_ids = set(county_list)
 
     if not (huc12_present or counties_present):
         errors.append(f"Neither HUC12Watersheds nor Counties encountered in document {document_path}, "

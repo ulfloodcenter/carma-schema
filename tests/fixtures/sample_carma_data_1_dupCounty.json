@@ -2,7 +2,7 @@
 	"GroundWaterAvailabilityDatasets": [
 		{
 			"huc12": "https://geoconnex.us/usgs/hydrologic-unit/080801030109",
-			"year": 2002.5,
+			"year": 2002,
 			"description": "This data set represents the mean annual natural groundwater recharge, in millimeters, compiled for every catchment of NHDPlus for the conterminous United States. The source data set is Estimated Mean Annual Natural Ground-Water Recharge in the Conterminous United States (Wolock, 2003).",
 			"sourceData": "https://water.usgs.gov/GIS/metadata/usgswrd/XML/nhd_recharge.xml",
 			"value": 123.45,
@@ -14,7 +14,7 @@
 		},
 		{
 			"huc12": "https://geoconnex.us/usgs/hydrologic-unit/080801030305",
-			"year": -42,
+			"year": 2002,
 			"description": "This data set represents the mean annual natural groundwater recharge, in millimeters, compiled for every catchment of NHDPlus for the conterminous United States. The source data set is Estimated Mean Annual Natural Ground-Water Recharge in the Conterminous United States (Wolock, 2003).",
 			"sourceData": "https://water.usgs.gov/GIS/metadata/usgswrd/XML/nhd_recharge.xml",
 			"value": 54.321,
@@ -178,6 +178,19 @@
 			"population": [
 				{
 					"year": 2020,
+					"count": 221578
+				}
+			],
+			"geometry": {"type": "MultiPolygon", "coordinates": [[[[-90.56719273910849, 30.643084757618922], [-90.56719273911638, 30.64309475764262], [-90.56718674020803, 30.6444787609383], [-90.56717074348666, 30.648633770828162]]]]}
+		},
+		{
+			"id": "https://geoconnex.us/ref/counties/22055",
+			"state": "Louisiana",
+			"county": "Lafayette",
+			"area": 697.23849898,
+			"population": [
+				{
+					"year": 2025,
 					"count": 221578
 				}
 			],

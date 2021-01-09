@@ -1,7 +1,7 @@
 {
 	"HUC12Watersheds": [
 		{
-			"id": "080801030109",
+			"id": "https://geoconnex.us/usgs/hydrologic-unit/080801030109",
 			"description": "Anselm Coulee-Vermilion River",
 			"area": 14270.417803582170405,
 			"maxStreamOrder": 5,
@@ -22,7 +22,7 @@
 	],
 	"Counties": [
 		{
-			"id": "22055",
+			"id": "https://geoconnex.us/ref/counties/22055",
 			"state": "Louisiana",
 			"county": "Lafayette",
 			"area": 697.23849898,

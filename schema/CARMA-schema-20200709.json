@@ -4,10 +4,6 @@
   "title": "CARMA schema",
   "description": "Data schema for Coastal Aquifer Research and Management Analytics (CARMA) Platform",
   "type": "object",
-  "oneOf": [
-			{"required": ["HUC12Watersheds"]},
-			{"required": ["Counties"]}
-  ],
   "properties": {
   	"HUC12Watersheds": {
   		"type": "array",
@@ -47,7 +43,8 @@
   		"properties": {
   			"id": {
   				"type": "string",
-  				"description": "The ID of the HUC-12, e.g.: 111402010000"
+				"pattern": "https://geoconnex\\.us/usgs/hydrologic-unit/[0-9]{12}",
+  				"description": "The fully qualified Internet of Water-compliant ID of the HUC-12 watershed, e.g.: https://geoconnex.us/usgs/hydrologic-unit/111402010000"
   			},
   			"description": {
   				"type": "string",
@@ -126,7 +123,8 @@
 		"properties": {
 			"id": {
   				"type": "string",
-  				"description": "The ID of the county, in the format of state FIPS code following by county FIPS code, e.g. 22055"
+				"pattern": "https://geoconnex\\.us/ref/counties/[0-9]{5}",
+  				"description": "The fully qualified Internet of Water-compliant ID of the county, with the terminal identifier in the format of state FIPS code following by county FIPS code, e.g. https://geoconnex.us/ref/counties/2055"
   			},
 			"state": {
 				"type": "string",
@@ -174,7 +172,8 @@
   		"properties": {
   			"huc12": {
   				"type": "string",
-  				"description": "The ID of the HUC-12 watershed that this dataset is associated with"
+				"pattern": "https://geoconnex\\.us/usgs/hydrologic-unit/[0-9]{12}",
+  				"description": "The fully qualified Internet of Water-compliant ID of the HUC-12 watershed that this dataset is associated with"
   			},
   			"description": {
   				"type": "string",
@@ -205,7 +204,8 @@
   		"properties": {
   			"huc12": {
   				"type": "string",
-  				"description": "The ID of the HUC-12 watershed that this dataset is associated with"
+				"pattern": "https://geoconnex\\.us/usgs/hydrologic-unit/[0-9]{12}",
+  				"description": "The fully qualified Internet of Water-compliant ID of the HUC-12 watershed that this dataset is associated with"
   			},
   			"description": {
   				"type": "string",
@@ -242,11 +242,13 @@
   		"properties": {
   			"huc12": {
   				"type": "string",
-  				"description": "The ID of the HUC-12 watershed that this dataset is associated with"
+				"pattern": "https://geoconnex\\.us/usgs/hydrologic-unit/[0-9]{12}",
+  				"description": "The fully qualified Internet of Water-compliant ID of the HUC-12 watershed that this dataset is associated with"
   			},
 			"county": {
   				"type": "string",
-  				"description": "The ID of the county, in the format of state FIPS code following by county FIPS code, e.g. 22055"
+				"pattern": "https://geoconnex\\.us/ref/counties/[0-9]{5}",
+  				"description": "The fully qualified Internet of Water-compliant ID of the county that this dataset is associated with"
   			},
   			"useType": {
 				"$ref": "#/definitions/UseType"	  

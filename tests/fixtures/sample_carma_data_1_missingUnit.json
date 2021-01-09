@@ -1,14 +1,14 @@
 {
 	"GroundWaterAvailabilityDatasets": [
 		{
-			"huc12": "080801030109",
+			"huc12": "https://geoconnex.us/usgs/hydrologic-unit/080801030109",
 			"year": 2002,
 			"description": "This data set represents the mean annual natural groundwater recharge, in millimeters, compiled for every catchment of NHDPlus for the conterminous United States. The source data set is Estimated Mean Annual Natural Ground-Water Recharge in the Conterminous United States (Wolock, 2003).",
 			"sourceData": "https://water.usgs.gov/GIS/metadata/usgswrd/XML/nhd_recharge.xml",
 			"value": 123.45
 		},
 		{
-			"huc12": "080801030305",
+			"huc12": "https://geoconnex.us/usgs/hydrologic-unit/080801030305",
 			"year": 2002,
 			"description": "This data set represents the mean annual natural groundwater recharge, in millimeters, compiled for every catchment of NHDPlus for the conterminous United States. The source data set is Estimated Mean Annual Natural Ground-Water Recharge in the Conterminous United States (Wolock, 2003).",
 			"sourceData": "https://water.usgs.gov/GIS/metadata/usgswrd/XML/nhd_recharge.xml",
@@ -23,7 +23,7 @@
 
 	"SurfaceWaterAvailabilityDatasets": [
 		{
-			"huc12":"080801030109",
+			"huc12":"https://geoconnex.us/usgs/hydrologic-unit/080801030109",
 			"description": "NHDPlus V21 National Seamless Geodatabase, December 4, 2016",
 			"sourceData": "https://www.epa.gov/waterdata/nhdplus-national-data",
 			"year": 2016,
@@ -35,7 +35,7 @@
 			}
 		},
 		{
-			"huc12":"080801030305",
+			"huc12":"https://geoconnex.us/usgs/hydrologic-unit/080801030305",
 			"description": "NHDPlus V21 National Seamless Geodatabase, December 4, 2016",
 			"sourceData": "https://www.epa.gov/waterdata/nhdplus-national-data",
 			"year": 2016,
@@ -50,7 +50,7 @@
 
 	"WaterUseDatasets": [
 		{
-			"huc12":"080801030109",
+			"huc12":"https://geoconnex.us/usgs/hydrologic-unit/080801030109",
 			"useType": { "name": "Ground Water" },
 			"sector": { "name": "Public Supply" },
 			"description": "Water use by public water utilities",
@@ -64,7 +64,7 @@
 			}
 		},
 		{
-			"huc12":"080801030305",
+			"huc12":"https://geoconnex.us/usgs/hydrologic-unit/080801030305",
 			"useType": { "name": "Ground Water" },
 			"sector": { "name": "Public Supply" },
 			"description": "Water use by public water utilities",
@@ -81,7 +81,7 @@
 	
 	"HUC12Watersheds": [
 		{
-			"id": "080801030109",
+			"id": "https://geoconnex.us/usgs/hydrologic-unit/080801030109",
 			"description": "Anselm Coulee-Vermilion River",
 			"area": 47.7692834437,
 			"maxStreamOrder": 4,
@@ -121,7 +121,7 @@
 			"geometry": {"type": "Polygon", "coordinates": [[[-85.1891468341552, 41.26769471037529], [-85.18814848371525, 41.267399516814635], [-85.18716202635878, 41.26786332887025], [-85.18600715411804, 41.26793813084512]]]}
 		},
 		{
-			"id": "080801030305",
+			"id": "https://geoconnex.us/usgs/hydrologic-unit/080801030305",
 			"description": "Deblane Coulee-Bayou Petite Anse",
 			"area": 83.4313439723,
 			"maxStreamOrder": 3,
@@ -166,7 +166,7 @@
 	],
 	"Counties": [
 		{
-			"id": "22055",
+			"id": "https://geoconnex.us/ref/counties/22055",
 			"state": "Louisiana",
 			"county": "Lafayette",
 			"area": 697.23849898,
