@@ -96,6 +96,6 @@ def validate(schema_path: str, document_path: str) -> (bool, dict):
             errors.append(f"Undefined counties encountered in {dataset_type}: {undef_county}")
 
     if len(errors) > 0:
-        return False, {'errors': errors}
+        return False, {'errors': errors, 'document': document}
     else:
-        return True, {}
+        return True, {'document': document}
