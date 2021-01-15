@@ -28,4 +28,6 @@ setuptools.setup(
         'console_scripts': [
             'carma-validator=carma_schema.cmd.validator:main',
     ]},
+    include_package_data=True,
+    zip_safe=False
 )
