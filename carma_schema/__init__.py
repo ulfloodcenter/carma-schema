@@ -14,6 +14,13 @@ DATASET_TYPES = [
 ]
 
 
+def get_county_ids(document: dict) -> list[str]:
+    county_list = []
+    if 'Counties' in document:
+        county_list = [h['id'] for h in document['Counties']]
+    return county_list
+
+
 def validate(schema_path: str, document_path: str) -> (bool, dict):
     schema = None
     with open(schema_path, 'r') as f:
