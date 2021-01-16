@@ -1,5 +1,6 @@
 import json
 from collections import Counter
+from typing import List
 
 import jsonschema
 
@@ -14,7 +15,7 @@ DATASET_TYPES = [
 ]
 
 
-def get_county_ids(document: dict) -> list[str]:
+def get_county_ids(document: dict) -> List[str]:
     county_list = []
     if 'Counties' in document:
         county_list = [h['id'] for h in document['Counties']]
