@@ -237,7 +237,7 @@
 			{"required": ["county"]}
 		],
 		"allOf": [
-			{"required": ["useType", "sector", "description", "sourceData", "year", "value", "unit"]}
+			{"required": ["sourceType", "sourceQuality", "entityType", "sector", "description", "sourceData", "year", "value", "unit"]}
 		],
   		"properties": {
   			"huc12": {
@@ -250,11 +250,21 @@
 				"pattern": "https://geoconnex\\.us/ref/counties/[0-9]{5}",
   				"description": "The fully qualified Internet of Water-compliant ID of the county that this dataset is associated with"
   			},
-  			"useType": {
-				"$ref": "#/definitions/UseType"	  
+			"entityType": {
+				"type": "string",
+				"enum": ["Water", "Power", "Person", "Facility", "Land"]
+			},
+  			"sourceType": {
+				"type": "string",
+  				"enum": ["Surface Water", "Ground Water", "Reclaimed", "All", "N/A"]
+			},
+			"sourceQuality": {
+				"type": "string",
+  				"enum": ["Fresh", "Saline", "Reclaimed", "Any", "N/A"]
 			},
   			"sector": {
-				"$ref": "#/definitions/Sector"	  
+				"type": "string",
+  				"enum": ["Public Supply", "Domestic", "Commercial", "Industrial", "Total Thermoelectric Power", "Fossil-fuel Thermoelectric Power", "Geothermal Thermoelectric Power", "Nuclear Thermoelectric Power", "Thermoelectric Power (Once-through cooling)", "Thermoelectric Power (Closed-loop cooling)", "Mining", "Livestock", "Livestock (Stock)", "Livestock (Animal Specialties)", "Aquaculture", "Irrigation, Total", "Irrigation, Crop", "Irrigation, Golf Courses", "Hydroelectric Power", "Wastewater Treatment"]
 			},
 			"description": {
 				"type": "string",
@@ -303,34 +313,8 @@
   		}
   	},
   	"Dimension": {
-  		"type": "object",
-  		"required": ["name"],
-  		"properties": {
-  			"name": {
-  				"type": "string",
-  				"enum": ["Millimeter", "Meter", "Cubic meter", "Hectare", "Liter", "Million liter", "Kilogram", "Kelvin", "Second", "Minute", "Hour", "Day", "Year"]
-  			}
-  		}
-  	},
-  	"UseType": {
-  		"type": "object",
-  		"required": ["name"],
-  		"properties": {
-  			"name": {
-  				"type": "string",
-  				"enum": ["Surface Water", "Ground Water"]
-  			}
-  		}
-  	},
-  	"Sector": {
-  		"type": "object",
-  		"required": ["name"],
-  		"properties": {
-  			"name": {
-  				"type": "string",
-  				"enum": ["Public Supply", "Domestic", "Commercial", "Industrial", "Total Thermoelectric Power", "Fossil-fuel Thermoelectric Power", "Geothermal Thermoelectric Power", "Nuclear Thermoelectric Power", "Thermoelectric Power (Once-through cooling)", "Thermoelectric Power (Closed-loop cooling)", "Mining", "Livestock", "Livestock (Stock)", "Livestock (Animal Specialities)", "Aquaculture", "Irrigation, Total", "Irrigation, Crop", "Irrigation, Golf Courses", "Hydroelectric Power", "Wastewater Treatment"]
-  			}
-  		}
+		"type": "string",
+		"enum": ["One", "Thousand", "Million", "Millimeter", "Capita", "Meter", "Cubic meter", "Acre", "Hectare", "Liter", "Gallon", "Kilogram", "Kelvin", "Gigawatt", "Second", "Minute", "Hour", "Day", "Year"]
   	}
   }
 }
