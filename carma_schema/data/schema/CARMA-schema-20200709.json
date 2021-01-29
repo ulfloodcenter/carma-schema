@@ -39,7 +39,8 @@
   "definitions": {
   	"HUC12Watershed": {
   		"type": "object",
-  		"required": ["id", "description", "geometry", "area", "crops", "developedArea", "maxStreamOrder", "meanAnnualFlow"],
+  		"required": ["id", "description", "geometry", "area", "crops", "developedArea", "maxStreamOrder",
+			"meanAnnualFlow", "recharge"],
   		"properties": {
   			"id": {
   				"type": "string",
@@ -77,6 +78,11 @@
 				"minimum": 0,
   				"description": "Mean annual streamflow (unit: mm)"
   			},
+			"recharge": {
+				"type": "number",
+				"minimum": 0,
+				"description": "Estimated mean annual natural ground-water recharge in the conterminous United States (unit: mm/km2/year)"
+			},
 			"geometry": {
   				"$ref": "https://geojson.org/schema/Polygon.json"
   			}
