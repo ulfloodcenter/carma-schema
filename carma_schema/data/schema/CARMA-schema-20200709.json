@@ -76,7 +76,7 @@
   			"meanAnnualFlow": {
   				"type": "number",
 				"minimum": 0,
-  				"description": "Mean annual streamflow (unit: mm)"
+  				"description": "The maximum mean annual streamflow in the HUC12 (i.e. streamflow at the HUC12 outlet; unit: cfs)"
   			},
 			"recharge": {
 				"type": "number",
@@ -125,7 +125,7 @@
 	},
 	"County": {
 		"type": "object",
-		"required": ["id", "state", "county", "area", "population", "geometry"],
+		"required": ["id", "state", "county", "area", "maxStreamOrder", "minStreamLevel", "meanAnnualFlow", "population", "geometry"],
 		"properties": {
 			"id": {
   				"type": "string",
@@ -144,6 +144,20 @@
   				"type": "number",
 				"minimum": 1,
   				"description": "The total area of the county (unit: square kilometers)"
+  			},
+			"maxStreamOrder": {
+  				"type": "integer",
+				"minimum": 1,
+  				"description": "The maximum Strahler order of streams in the county (unitless)"
+  			},
+			"minStreamLevel": {
+  				"type": "integer",
+  				"description": "The minimum stream level of streams in the county; stream level=1 indicates that a stream terminates at a coastline (unitless)"
+  			},
+  			"meanAnnualFlow": {
+  				"type": "number",
+				"minimum": 0,
+  				"description": "The maximum mean annual streamflow (unit: cfs)"
   			},
 			"population": {
 				"type": "array",
