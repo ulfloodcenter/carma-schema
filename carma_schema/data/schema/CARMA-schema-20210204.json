@@ -121,9 +121,7 @@
           "type": "string",
           "description": "A description for the HUC-12 watershed"
         },
-        "area": {
-          "$ref": "#/definitions/AreaHA"
-        },
+        "area": { "$ref": "#/definitions/AreaHA" },
         "crops": {
           "type": "array",
           "items": {
@@ -188,6 +186,8 @@
         "state",
         "county",
         "area",
+        "crops",
+        "developedArea",
         "maxStreamOrder",
         "minStreamLevel",
         "meanAnnualFlow",
@@ -205,6 +205,22 @@
           "description": "The name of the county (not including the word 'County'), e.g. 'Lafayette'."
         },
         "area": { "$ref": "#/definitions/AreaKM2" },
+        "crops": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CropArea"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "developedArea": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DevelopedArea"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
         "maxStreamOrder": { "$ref": "#/definitions/MaxStreamOrder" },
         "minStreamLevel": { "$ref": "#/definitions/MinStreamLevel" },
         "meanAnnualFlow": { "$ref": "#/definitions/MeanAnnualFlow" },
