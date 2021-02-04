@@ -21,6 +21,14 @@
       "minItems": 1,
       "uniqueItems": true
     },
+    "SubHUC12Watersheds": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/SubHUC12Watershed"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
     "GroundWaterAvailabilityDatasets": {
       "type": "array",
       "items": {
@@ -57,9 +65,46 @@
 			"pattern": "https://geoconnex\\.us/ref/counties/[0-9]{5}",
 			"description": "The fully qualified Internet of Water-compliant ID of the county, with the terminal identifier in the format of state FIPS code following by county FIPS code, e.g. https://geoconnex.us/ref/counties/2055"
 		},
+    "Analysis": {
+      "type": "object",
+      "oneOf": [
+        "WaSSI"
+      ],
+      "properties": {
+        "wassi": { "$ref": "#/definitions/AnalysisWaSSI" }
+      }
+    },
+    "AnalysisWaSSI": {
+      "type": "object",
+      "required": ["weights"],
+      "properties": {
+        "weights": {
+          "type": "object",
+          "required": ["w1", "w2", "w3", "w4"],
+          "properties": {
+            "w1": {
+              "type": "number",
+              "description": "(A): Area of HUC12 / Area of county"
+            },
+            "w2": {
+              "type": "number",
+              "description": "(CA): Crop area in HUC12 / Crop area in county"
+            },
+            "w3": {
+              "type": "number",
+              "description": "(SO or SF): Max(SO or SF) in HUC12 / SUM(Max(SO or SF)) in County"
+            },
+            "w4": {
+              "type": "number",
+              "description": "(HD): Highly developed area in HUC12 / Highly Developed area in County"
+            }
+          }
+        }
+      }
+    },
 		"URL": {
 			"type": "string",
-			"description": "An RFC 3986 URI. No regex is currently provided, but may be in the future."
+			"description": "A RFC 3986 URI. No regex is currently provided, but may be in the future."
 		},
     "AreaHA": {
       "type": "number",
@@ -114,9 +159,7 @@
         "recharge"
       ],
       "properties": {
-        "id": {
-          "$ref": "#/definitions/HUC12ID"
-        },
+        "id": { "$ref": "#/definitions/HUC12ID" },
         "description": {
           "type": "string",
           "description": "A description for the HUC-12 watershed"
@@ -151,6 +194,63 @@
         },
         "geometry": {
           "$ref": "https://geojson.org/schema/Polygon.json"
+        }
+      }
+    },
+    "SubHUC12Watershed": {
+      "type": "object",
+      "required": [
+        "huc12",
+        "county",
+        "area",
+        "crops",
+        "developedArea",
+        "maxStreamOrder",
+        "minStreamLevel",
+        "meanAnnualFlow"
+      ],
+      "properties": {
+        "huc12": {
+          "$ref": "#/definitions/HUC12ID"
+        },
+        "county": {
+          "$ref": "#/definitions/CountyID"
+        },
+        "area": {
+          "$ref": "#/definitions/AreaKM2"
+        },
+        "crops": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CropArea"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "developedArea": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DevelopedArea"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "maxStreamOrder": {
+          "$ref": "#/definitions/MaxStreamOrder"
+        },
+        "minStreamLevel": {
+          "$ref": "#/definitions/MinStreamLevel"
+        },
+        "meanAnnualFlow": {
+          "$ref": "#/definitions/MeanAnnualFlow"
+        },
+        "analyses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Analysis"
+          },
+          "minItems": 1,
+          "uniqueItems": true
         }
       }
     },
