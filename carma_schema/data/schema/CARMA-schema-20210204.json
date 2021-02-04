@@ -1,0 +1,430 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://floodcenter.louisiana.edu/CARMA.schema.20210204.json",
+  "title": "CARMA schema",
+  "description": "Data schema for Coastal Aquifer Research and Management Analytics (CARMA) Platform",
+  "type": "object",
+  "properties": {
+    "HUC12Watersheds": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/HUC12Watershed"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "Counties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/County"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "GroundWaterAvailabilityDatasets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/GroundWaterAvailabilityDataset"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "SurfaceWaterAvailabilityDatasets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/SurfaceWaterAvailabilityDataset"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "WaterUseDatasets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/WaterUseDataset"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  },
+  "definitions": {
+    "HUC12ID": {
+      "type": "string",
+      "pattern": "https://geoconnex\\.us/usgs/hydrologic-unit/[0-9]{12}",
+      "description": "The fully qualified Internet of Water-compliant ID of the HUC-12 watershed, e.g.: https://geoconnex.us/usgs/hydrologic-unit/111402010000"
+    },
+		"CountyID": {
+			"type": "string",
+			"pattern": "https://geoconnex\\.us/ref/counties/[0-9]{5}",
+			"description": "The fully qualified Internet of Water-compliant ID of the county, with the terminal identifier in the format of state FIPS code following by county FIPS code, e.g. https://geoconnex.us/ref/counties/2055"
+		},
+		"URL": {
+			"type": "string",
+			"description": "An RFC 3986 URI. No regex is currently provided, but may be in the future."
+		},
+    "AreaHA": {
+      "type": "number",
+      "minimum": 0,
+      "description": "The total area of the geography (e.g. HUC12, county, SubHUC12; unit: ha)"
+    },
+		"AreaKM2": {
+      "type": "number",
+      "minimum": 0,
+      "description": "The total area of the geography (e.g. HUC12, county, SubHUC12; unit: square kilometers)"
+    },
+    "MaxStreamOrder": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "The maximum Strahler order of streams in a geography (unitless)"
+    },
+		"MinStreamLevel": {
+			"type": "integer",
+			"minimum": -9,
+			"description": "The minimum stream level of streams in the county; stream level=1 indicates that a stream terminates at a coastline (unitless)"
+		},
+    "MeanAnnualFlow": {
+      "type": "number",
+      "minimum": 0,
+      "description": "The maximum mean annual streamflow of all streams in a geography (e.g. streamflow at the HUC12 outlet; unit: cfs)"
+    },
+		"Year": {
+			"type": "integer",
+			"minimum": 1,
+			"description": "The year associate with a datum."
+		},
+		"Value": {
+			"type": "number",
+			"minimum": 0,
+			"description": "A data value associated with a dataset"
+		},
+		"NegativeValue": {
+			"type": "number",
+			"description": "A data value associated with a dataset"
+		},
+    "HUC12Watershed": {
+      "type": "object",
+      "required": [
+        "id",
+        "description",
+        "geometry",
+        "area",
+        "crops",
+        "developedArea",
+        "maxStreamOrder",
+        "meanAnnualFlow",
+        "recharge"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/HUC12ID"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description for the HUC-12 watershed"
+        },
+        "area": {
+          "$ref": "#/definitions/AreaHA"
+        },
+        "crops": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CropArea"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "developedArea": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DevelopedArea"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "maxStreamOrder": {
+          "$ref": "#/definitions/MaxStreamOrder"
+        },
+        "meanAnnualFlow": {
+          "$ref": "#/definitions/MeanAnnualFlow"
+        },
+        "recharge": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Estimated mean annual natural ground-water recharge in the conterminous United States (unit: mm/km2/year)"
+        },
+        "geometry": {
+          "$ref": "https://geojson.org/schema/Polygon.json"
+        }
+      }
+    },
+    "CropArea": {
+      "type": "object",
+      "required": [
+        "year",
+        "cropArea"
+      ],
+      "properties": {
+        "year": { "$ref": "#/definitions/Year" },
+        "cropArea": { "$ref": "#/definitions/AreaKM2" },
+        "cropAreaDetail": {
+          "type": "object"
+        }
+      }
+    },
+    "DevelopedArea": {
+      "type": "object",
+      "required": [
+        "year",
+        "area"
+      ],
+      "properties": {
+        "year": { "$ref": "#/definitions/Year" },
+        "area": { "$ref": "#/definitions/AreaKM2" }
+      }
+    },
+    "County": {
+      "type": "object",
+      "required": [
+        "id",
+        "state",
+        "county",
+        "area",
+        "maxStreamOrder",
+        "minStreamLevel",
+        "meanAnnualFlow",
+        "population",
+        "geometry"
+      ],
+      "properties": {
+        "id": { "$ref": "#/definitions/CountyID" },
+        "state": {
+          "type": "string",
+          "description": "The full name of the state that county is in, e.g. 'Louisiana'."
+        },
+        "county": {
+          "type": "string",
+          "description": "The name of the county (not including the word 'County'), e.g. 'Lafayette'."
+        },
+        "area": { "$ref": "#/definitions/AreaKM2" },
+        "maxStreamOrder": { "$ref": "#/definitions/MaxStreamOrder" },
+        "minStreamLevel": { "$ref": "#/definitions/MinStreamLevel" },
+        "meanAnnualFlow": { "$ref": "#/definitions/MeanAnnualFlow" },
+        "population": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Population"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "geometry": {
+          "$ref": "https://geojson.org/schema/MultiPolygon.json"
+        }
+      }
+    },
+    "Population": {
+      "type": "object",
+      "required": [
+        "year",
+        "count"
+      ],
+      "properties": {
+        "year": { "$ref": "#/definitions/Year" },
+        "count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The count, or estimated count, of people living in the county."
+        }
+      }
+    },
+    "GroundWaterAvailabilityDataset": {
+      "type": "object",
+      "required": [
+        "huc12",
+        "description",
+        "sourceData",
+        "year",
+        "value",
+        "unit"
+      ],
+      "properties": {
+        "huc12": { "$ref": "#/definitions/HUC12ID" },
+        "description": {
+          "type": "string",
+          "description": "A description of the ground water dataset"
+        },
+        "sourceData": { "$ref": "#/definitions/URL" },
+        "year": { "$ref": "#/definitions/Year" },
+        "value": { "$ref": "#/definitions/Value" },
+        "unit": { "$ref": "#/definitions/Unit" }
+      }
+    },
+    "SurfaceWaterAvailabilityDataset": {
+      "type": "object",
+      "required": [
+        "huc12",
+        "description",
+        "sourceData",
+        "year",
+        "value",
+        "unit"
+      ],
+      "properties": {
+        "huc12": { "$ref": "#/definitions/HUC12ID" },
+        "description": {
+          "type": "string",
+          "description": "A description of the ground water dataset"
+        },
+        "sourceData": { "$ref": "#/definitions/URL" },
+        "year": { "$ref": "#/definitions/Year" },
+        "value": { "$ref": "#/definitions/Value" },
+        "unit": { "$ref": "#/definitions/Unit" }
+      }
+    },
+    "WaterUseDataset": {
+      "type": "object",
+      "oneOf": [
+        {
+          "required": [
+            "huc12"
+          ]
+        },
+        {
+          "required": [
+            "county"
+          ]
+        }
+      ],
+      "allOf": [
+        {
+          "required": [
+            "sourceType",
+            "sourceQuality",
+            "entityType",
+            "sector",
+            "description",
+            "sourceData",
+            "year",
+            "value",
+            "unit"
+          ]
+        }
+      ],
+      "properties": {
+        "huc12": { "$ref": "#/definitions/HUC12ID" },
+        "county": { "$ref": "#/definitions/CountyID" },
+        "entityType": {
+          "type": "string",
+          "enum": [
+            "Water",
+            "Power",
+            "Person",
+            "Facility",
+            "Land"
+          ]
+        },
+        "sourceType": {
+          "type": "string",
+          "enum": [
+            "Surface Water",
+            "Ground Water",
+            "Reclaimed",
+            "All",
+            "N/A"
+          ]
+        },
+        "sourceQuality": {
+          "type": "string",
+          "enum": [
+            "Fresh",
+            "Saline",
+            "Reclaimed",
+            "Any",
+            "N/A"
+          ]
+        },
+        "sector": {
+          "type": "string",
+          "enum": [
+            "Public Supply",
+            "Domestic",
+            "Commercial",
+            "Industrial",
+            "Total Thermoelectric Power",
+            "Fossil-fuel Thermoelectric Power",
+            "Geothermal Thermoelectric Power",
+            "Nuclear Thermoelectric Power",
+            "Thermoelectric Power (Once-through cooling)",
+            "Thermoelectric Power (Closed-loop cooling)",
+            "Mining",
+            "Livestock",
+            "Livestock (Stock)",
+            "Livestock (Animal Specialties)",
+            "Aquaculture",
+            "Irrigation, Total",
+            "Irrigation, Crop",
+            "Irrigation, Golf Courses",
+            "Hydroelectric Power",
+            "Wastewater Treatment"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the water use dataset"
+        },
+        "sourceData": { "$ref": "#/definitions/URL" },
+        "year": { "$ref": "#/definitions/Year" },
+        "value": { "$ref": "#/definitions/Value" },
+        "unit": { "$ref": "#/definitions/Unit" }
+      }
+    },
+    "Unit": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The abbreviation of the unit."
+        },
+        "description": {
+          "type": "string",
+          "description": "A more detailed description of the unit."
+        },
+        "primaryDimension": {
+          "$ref": "#/definitions/Dimension"
+        },
+        "secondaryDimension": {
+          "$ref": "#/definitions/Dimension"
+        },
+        "tertiaryDimension": {
+          "$ref": "#/definitions/Dimension"
+        }
+      }
+    },
+    "Dimension": {
+      "type": "string",
+      "enum": [
+        "One",
+        "Thousand",
+        "Million",
+        "Millimeter",
+        "Capita",
+        "Meter",
+        "Cubic meter",
+        "Acre",
+        "Hectare",
+        "Liter",
+        "Gallon",
+        "Kilogram",
+        "Kelvin",
+        "Gigawatt",
+        "Second",
+        "Minute",
+        "Hour",
+        "Day",
+        "Year"
+      ]
+    }
+  }
+}
