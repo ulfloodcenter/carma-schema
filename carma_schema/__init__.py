@@ -7,11 +7,16 @@ import jsonschema
 from carma_schema.util import find_duplicates
 
 
+DEFINITION_TYPES = [
+    'HUC12Watersheds',
+    'Counties',
+    'SubHUC12Watersheds'
+]
+
 DATASET_TYPES = [
     'GroundWaterAvailabilityDatasets',
     'SurfaceWaterAvailabilityDatasets',
-    'WaterUseDatasets',
-    'GroundWaterAvailabilityDatasets'
+    'WaterUseDatasets'
 ]
 
 

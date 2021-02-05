@@ -207,7 +207,8 @@
         "developedArea",
         "maxStreamOrder",
         "minStreamLevel",
-        "meanAnnualFlow"
+        "meanAnnualFlow",
+        "geometry"
       ],
       "properties": {
         "huc12": {
@@ -251,6 +252,9 @@
           },
           "minItems": 1,
           "uniqueItems": true
+        },
+        "geometry": {
+          "$ref": "https://geojson.org/schema/MultiPolygon.json"
         }
       }
     },
