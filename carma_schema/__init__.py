@@ -15,6 +15,13 @@ DATASET_TYPES = [
 ]
 
 
+def get_huc12_ids(document: dict) -> List[str]:
+    huc12_list = []
+    if 'HUC12Watersheds' in document:
+        huc12_list = [h['id'] for h in document['HUC12Watersheds']]
+    return huc12_list
+
+
 def get_county_ids(document: dict) -> List[str]:
     county_list = []
     if 'Counties' in document:
