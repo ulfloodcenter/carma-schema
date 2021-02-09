@@ -106,11 +106,6 @@
 			"type": "string",
 			"description": "A RFC 3986 URI. No regex is currently provided, but may be in the future."
 		},
-    "AreaHA": {
-      "type": "number",
-      "minimum": 0,
-      "description": "The total area of the geography (e.g. HUC12, county, SubHUC12; unit: ha)"
-    },
 		"AreaKM2": {
       "type": "number",
       "minimum": 0,
@@ -164,7 +159,7 @@
           "type": "string",
           "description": "A description for the HUC-12 watershed"
         },
-        "area": { "$ref": "#/definitions/AreaHA" },
+        "area": { "$ref": "#/definitions/AreaKM2" },
         "crops": {
           "type": "array",
           "items": {
