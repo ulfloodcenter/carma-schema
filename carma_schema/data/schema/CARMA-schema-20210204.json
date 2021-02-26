@@ -150,6 +150,7 @@
         "crops",
         "developedArea",
         "maxStreamOrder",
+        "minStreamLevel",
         "meanAnnualFlow",
         "recharge"
       ],
@@ -178,6 +179,9 @@
         },
         "maxStreamOrder": {
           "$ref": "#/definitions/MaxStreamOrder"
+        },
+        "minStreamLevel": {
+          "$ref": "#/definitions/MinStreamLevel"
         },
         "meanAnnualFlow": {
           "$ref": "#/definitions/MeanAnnualFlow"
