@@ -4,7 +4,7 @@ from typing import List
 
 import jsonschema
 
-from carma_schema.util import find_duplicates
+from carma_schema.types import CropData, DevelopedArea
 
 
 DEFINITION_TYPES = [
@@ -32,6 +32,24 @@ def get_county_ids(document: dict) -> List[str]:
     if 'Counties' in document:
         county_list = [h['id'] for h in document['Counties']]
     return county_list
+
+
+def get_crop_data_for_entity(entity: dict, year: int) -> CropData:
+    crop_data = None
+    for crop in entity['crops']:
+        if crop['year'] == year:
+            crop_data = CropData(year, crop['cropArea'], crop['cropAreaDetail'])
+            break
+    return crop_data
+
+
+def get_developed_area_data_for_entity(entity: dict, year: int) -> DevelopedArea:
+    developed_area = None
+    for da in entity['developedArea']:
+        if da['year'] == year:
+            developed_area = DevelopedArea(year, da['area'])
+            break
+    return developed_area
 
 
 def validate(schema_path: str, document_path: str) -> (bool, dict):
