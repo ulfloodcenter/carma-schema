@@ -10,7 +10,8 @@ from carma_schema.types import CropData, DevelopedArea
 DEFINITION_TYPES = [
     'HUC12Watersheds',
     'Counties',
-    'SubHUC12Watersheds'
+    'SubHUC12Watersheds',
+    'Analyses'
 ]
 
 DATASET_TYPES = [
