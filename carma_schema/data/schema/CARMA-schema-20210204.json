@@ -63,6 +63,12 @@
     }
   },
   "definitions": {
+    "UUID" : {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "minLength": 36,
+      "maxLength": 36
+    },
     "HUC12ID": {
       "type": "string",
       "pattern": "https://geoconnex\\.us/usgs/hydrologic-unit/[0-9]{12}",
@@ -96,18 +102,17 @@
     "AnalysisWaSSI": {
       "type": "object",
       "required": [
-        "huc12",
-        "county",
+        "id",
         "cropYear",
-        "developedAreaYear",
-        "surfaceWeights"
+        "developedAreaYear"
       ],
       "properties": {
-        "huc12": {
-          "$ref": "#/definitions/HUC12ID"
+        "id": {
+          "$ref": "#/definitions/UUID"
         },
-        "county": {
-          "$ref": "#/definitions/CountyID"
+        "description": {
+          "type": "string",
+          "description": "A WaSSI analysis."
         },
         "cropYear": {
           "description": "Year of crop data used to generate WaSSI weights.",
@@ -116,6 +121,31 @@
         "developedAreaYear": {
           "description": "Year of developed area data used to generate WaSSI weights.",
           "$ref": "#/definitions/Year"
+        },
+        "countyDisaggregations": {
+          "description": "Collection of sub-HUC12, county pairs for disaggregating county-based data.",
+          "type": "array",
+          "items":{
+            "$ref": "#/definitions/WaSSI_countyDisaggregation"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "WaSSI_countyDisaggregation": {
+      "type": "object",
+      "required": [
+        "huc12",
+        "county",
+        "surfaceWeights"
+      ],
+      "properties": {
+        "huc12": {
+          "$ref": "#/definitions/HUC12ID"
+        },
+        "county": {
+          "$ref": "#/definitions/CountyID"
         },
         "surfaceWeights": {
           "$ref": "#/definitions/WaSSI_surfaceWeights"
