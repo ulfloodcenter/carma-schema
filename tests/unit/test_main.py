@@ -4,7 +4,7 @@ from dataclasses import asdict
 import uuid
 
 from carma_schema.types import AnalysisWaSSI, SurfaceWeightsWaSSI, CountyDisaggregationWaSSI
-from carma_schema import get_wassi_analysis_by_id
+from carma_schema import get_wassi_analysis_by_id, update_wassi_analysis_instance
 
 
 class TestMainModule(unittest.TestCase):
@@ -15,7 +15,7 @@ class TestMainModule(unittest.TestCase):
                                                    SurfaceWeightsWaSSI(7.8, 5.6, 3.4, 1.2))
 
         id = uuid.uuid4()
-        wassi_orig = AnalysisWaSSI(id, 2019, 2016, description="Test WaSSI analysis 2",
+        wassi_orig = AnalysisWaSSI(id, 2019, 2016, description='Test WaSSI analysis 2',
                                    countyDisaggregations=[county_disagg1, county_disagg2])
 
         document = OrderedDict()
@@ -23,6 +23,7 @@ class TestMainModule(unittest.TestCase):
         document['Analyses'] = [analyses]
         analyses['WaSSI'] = [asdict(wassi_orig)]
 
+        # Test getting
         wassi_from_doc = get_wassi_analysis_by_id(document, id)
         self.assertEqual(wassi_orig.id, wassi_from_doc.id)
         self.assertEqual(wassi_orig.cropYear, wassi_from_doc.cropYear)
@@ -32,3 +33,18 @@ class TestMainModule(unittest.TestCase):
             self.assertEqual(cda_orig.huc12, cda_doc.huc12)
             self.assertEqual(cda_orig.county, cda_doc.county)
             self.assertEqual(cda_orig.surfaceWeights, cda_doc.surfaceWeights)
+
+        # Test updating
+        wassi_from_doc.cropYear = 2020
+        wassi_from_doc.developedAreaYear = 2021
+        wassi_from_doc.description = 'Updated description'
+        wassi_from_doc.countyDisaggregations[0].surfaceWeights.w1 = 42.23
+        status = update_wassi_analysis_instance(document, wassi_from_doc)
+        self.assertTrue(status)
+        updated = get_wassi_analysis_by_id(document, id)
+        self.assertEqual(2020, updated.cropYear)
+        self.assertEqual(2021, updated.developedAreaYear)
+        self.assertEqual('Updated description', updated.description)
+        self.assertEqual(42.23, updated.countyDisaggregations[0].surfaceWeights.w1)
+        self.assertEqual(3.4, updated.countyDisaggregations[0].surfaceWeights.w2)
+        self.assertEqual(7.8, updated.countyDisaggregations[1].surfaceWeights.w1)

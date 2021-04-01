@@ -2,6 +2,7 @@ import json
 from collections import Counter
 from typing import List
 from uuid import UUID
+from dataclasses import asdict
 
 import jsonschema
 
@@ -62,6 +63,20 @@ def get_wassi_analysis_by_id(document: dict, id: UUID) -> AnalysisWaSSI:
                     if w['id'] == id:
                         return AnalysisWaSSI.from_dict(w)
     return None
+
+
+def update_wassi_analysis_instance(document: dict, wassi: AnalysisWaSSI) -> bool:
+    if 'Analyses' in document:
+        for a in document['Analyses']:
+            if 'WaSSI' in a:
+                for w in a['WaSSI']:
+                    if w['id'] == wassi.id:
+                        w['cropYear'] = wassi.cropYear
+                        w['developedAreaYear'] = wassi.developedAreaYear
+                        w['description'] = wassi.description
+                        w['countyDisaggregations'] = asdict(wassi)['countyDisaggregations']
+                        return True
+    return False
 
 
 def validate(schema_path: str, document_path: str) -> (bool, dict):
