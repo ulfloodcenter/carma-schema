@@ -67,7 +67,8 @@
       "type": "string",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
       "minLength": 36,
-      "maxLength": 36
+      "maxLength": 36,
+      "description": "RFC 4122-compliant UUID."
     },
     "HUC12ID": {
       "type": "string",
@@ -110,10 +111,6 @@
         "id": {
           "$ref": "#/definitions/UUID"
         },
-        "description": {
-          "type": "string",
-          "description": "A WaSSI analysis."
-        },
         "cropYear": {
           "description": "Year of crop data used to generate WaSSI weights.",
           "$ref": "#/definitions/Year"
@@ -121,6 +118,10 @@
         "developedAreaYear": {
           "description": "Year of developed area data used to generate WaSSI weights.",
           "$ref": "#/definitions/Year"
+        },
+        "description": {
+          "type": "string",
+          "description": "A WaSSI analysis."
         },
         "countyDisaggregations": {
           "description": "Collection of sub-HUC12, county pairs for disaggregating county-based data.",

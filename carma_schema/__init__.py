@@ -1,10 +1,11 @@
 import json
 from collections import Counter
 from typing import List
+from uuid import UUID
 
 import jsonschema
 
-from carma_schema.types import CropData, DevelopedArea
+from carma_schema.types import CropData, DevelopedArea, AnalysisWaSSI
 
 
 DEFINITION_TYPES = [
@@ -51,6 +52,16 @@ def get_developed_area_data_for_entity(entity: dict, year: int) -> DevelopedArea
             developed_area = DevelopedArea(year, da['area'])
             break
     return developed_area
+
+
+def get_wassi_analysis_by_id(document: dict, id: UUID) -> AnalysisWaSSI:
+    if 'Analyses' in document:
+        for a in document['Analyses']:
+            if 'WaSSI' in a:
+                for w in a['WaSSI']:
+                    if w['id'] == id:
+                        return AnalysisWaSSI.from_dict(w)
+    return None
 
 
 def validate(schema_path: str, document_path: str) -> (bool, dict):

@@ -21,6 +21,7 @@ setuptools.setup(
     python_requires='>=3.7',
     install_requires=[
         'jsonschema',
+        'dataclasses-json==0.5.2'
     ],
     tests_require=[
     ],
