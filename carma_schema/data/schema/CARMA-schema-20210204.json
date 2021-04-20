@@ -269,7 +269,7 @@
           "items": {
             "$ref": "#/definitions/GroundwaterWellCount"
           },
-          "minItems": 1,
+          "minItems": 0,
           "uniqueItems": true
         },
         "geometry": {
@@ -338,7 +338,7 @@
           "items": {
             "$ref": "#/definitions/GroundwaterWellCount"
           },
-          "minItems": 1,
+          "minItems": 0,
           "uniqueItems": true
         },
         "geometry": {
@@ -429,7 +429,7 @@
           "items": {
             "$ref": "#/definitions/GroundwaterWellCount"
           },
-          "minItems": 1,
+          "minItems": 0,
           "uniqueItems": true
         },
         "geometry": {
