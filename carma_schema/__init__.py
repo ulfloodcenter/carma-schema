@@ -60,7 +60,7 @@ def get_wassi_analysis_by_id(document: dict, id: UUID) -> AnalysisWaSSI:
         for a in document['Analyses']:
             if 'WaSSI' in a:
                 for w in a['WaSSI']:
-                    if w['id'] == id:
+                    if w['id'] == str(id):
                         return AnalysisWaSSI.from_dict(w)
     return None
 
@@ -70,7 +70,7 @@ def update_wassi_analysis_instance(document: dict, wassi: AnalysisWaSSI) -> bool
         for a in document['Analyses']:
             if 'WaSSI' in a:
                 for w in a['WaSSI']:
-                    if w['id'] == wassi.id:
+                    if w['id'] == str(wassi.id):
                         w['cropYear'] = wassi.cropYear
                         w['developedAreaYear'] = wassi.developedAreaYear
                         w['description'] = wassi.description
