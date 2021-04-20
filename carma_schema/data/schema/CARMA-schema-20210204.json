@@ -264,6 +264,14 @@
           "minimum": 0,
           "description": "Estimated mean annual natural ground-water recharge in the conterminous United States (unit: mm/km2/year)"
         },
+        "groundWaterWells": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroundWaterWellCount"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
         "geometry": {
           "$ref": "https://geojson.org/schema/Polygon.json"
         }
@@ -321,6 +329,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Analysis"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "groundWaterWells": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroundWaterWellCount"
           },
           "minItems": 1,
           "uniqueItems": true
@@ -408,6 +424,14 @@
           "minItems": 1,
           "uniqueItems": true
         },
+        "groundWaterWells": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroundWaterWellCount"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
         "geometry": {
           "$ref": "https://geojson.org/schema/MultiPolygon.json"
         }
@@ -425,6 +449,47 @@
           "type": "integer",
           "minimum": 0,
           "description": "The count, or estimated count, of people living in the county."
+        }
+      }
+    },
+    "GroundWaterWellCount" : {
+      "type": "object",
+      "required": [
+        "sector",
+        "status",
+        "yearCompleted",
+        "count"
+      ],
+      "properties": {
+        "sector": {
+          "type": "string",
+          "enum": [
+            "Public Supply",
+            "Domestic",
+            "Commercial",
+            "Industrial",
+            "Power Generation",
+            "Irrigation",
+            "Livestock"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Active",
+            "Abandoned",
+            "Destroyed",
+            "Inactive"
+          ]
+        },
+        "yearCompleted": {
+          "description": "Year during or before which wells were completed.",
+          "$ref": "#/definitions/Year"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of wells of a given sector, status, completed during or after year completed."
         }
       }
     },

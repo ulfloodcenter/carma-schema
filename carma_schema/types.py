@@ -5,6 +5,24 @@ from uuid import UUID
 from dataclasses_json import dataclass_json
 
 
+WELL_SECTORS = [
+    "Public Supply",
+    "Domestic",
+    "Commercial",
+    "Industrial",
+    "Power Generation",
+    "Irrigation",
+    "Livestock"
+]
+
+WELL_STATUS = [
+    "Active",
+    "Abandoned",
+    "Destroyed",
+    "Inactive"
+]
+
+
 @dataclass_json
 @dataclass
 class CropData:
