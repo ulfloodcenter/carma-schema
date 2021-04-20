@@ -264,10 +264,10 @@
           "minimum": 0,
           "description": "Estimated mean annual natural ground-water recharge in the conterminous United States (unit: mm/km2/year)"
         },
-        "groundWaterWells": {
+        "groundwaterWells": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GroundWaterWellCount"
+            "$ref": "#/definitions/GroundwaterWellCount"
           },
           "minItems": 1,
           "uniqueItems": true
@@ -333,10 +333,10 @@
           "minItems": 1,
           "uniqueItems": true
         },
-        "groundWaterWells": {
+        "groundwaterWells": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GroundWaterWellCount"
+            "$ref": "#/definitions/GroundwaterWellCount"
           },
           "minItems": 1,
           "uniqueItems": true
@@ -424,10 +424,10 @@
           "minItems": 1,
           "uniqueItems": true
         },
-        "groundWaterWells": {
+        "groundwaterWells": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GroundWaterWellCount"
+            "$ref": "#/definitions/GroundwaterWellCount"
           },
           "minItems": 1,
           "uniqueItems": true
@@ -452,7 +452,7 @@
         }
       }
     },
-    "GroundWaterWellCount" : {
+    "GroundwaterWellCount" : {
       "type": "object",
       "required": [
         "sector",
