@@ -139,7 +139,8 @@
       "required": [
         "huc12",
         "county",
-        "surfaceWeights"
+        "surfaceWeights",
+        "groundwaterWeights"
       ],
       "properties": {
         "huc12": {
@@ -150,6 +151,9 @@
         },
         "surfaceWeights": {
           "$ref": "#/definitions/WaSSI_surfaceWeights"
+        },
+        "groundwaterWeights": {
+          "$ref": "#/definitions/WaSSI_groundwaterWeights"
         }
       }
     },
@@ -172,6 +176,55 @@
         "w4": {
           "type": "number",
           "description": "(HD): Highly developed area in HUC12 / Highly Developed area in County"
+        }
+      }
+    },
+    "WaSSI_groundwaterWeights": {
+      "type": "object",
+      "required": [
+        "publicSupply",
+        "domestic",
+        "commercial",
+        "industrial",
+        "powerGeneration",
+        "irrigation",
+        "livestock"
+      ],
+      "properties": {
+        "publicSupply": {
+          "type": "number",
+          "description": "Number of public supply wells in HUC12 / Number of public supply wells in county",
+          "minimum": 0
+        },
+        "domestic": {
+          "type": "number",
+          "description": "Number of domestic wells in HUC12 / Number of domestic wells in county",
+          "minimum": 0
+        },
+        "commercial": {
+          "type": "number",
+          "description": "Number of commercial wells in HUC12 / Number of commercial wells in county",
+          "minimum": 0
+        },
+        "industrial": {
+          "type": "number",
+          "description": "Number of industrial wells in HUC12 / Number of industrial wells in county",
+          "minimum": 0
+        },
+        "powerGeneration": {
+          "type": "number",
+          "description": "Number of power generation wells in HUC12 / Number of power generation wells in county",
+          "minimum": 0
+        },
+        "irrigation": {
+          "type": "number",
+          "description": "Number of irrigation wells in HUC12 / Number of irrigation wells in county",
+          "minimum": 0
+        },
+        "livestock": {
+          "type": "number",
+          "description": "Number of livestock wells in HUC12 / Number of livestock wells in county",
+          "minimum": 0
         }
       }
     },

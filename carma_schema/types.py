@@ -49,10 +49,23 @@ class SurfaceWeightsWaSSI:
 
 @dataclass_json
 @dataclass
+class GroundwaterWeightsWaSSI:
+    publicSupply: float
+    domestic: float
+    commercial: float
+    industrial: float
+    powerGeneration: float
+    irrigation: float
+    livestock: float
+
+
+@dataclass_json
+@dataclass
 class CountyDisaggregationWaSSI:
     huc12: str
     county: str
     surfaceWeights: SurfaceWeightsWaSSI
+    groundwaterWeights: GroundwaterWeightsWaSSI
 
 
 @dataclass_json
