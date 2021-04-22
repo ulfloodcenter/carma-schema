@@ -83,5 +83,6 @@ class AnalysisWaSSI:
     id: UUID
     cropYear: int
     developedAreaYear: int
+    groundwaterWellsCompletedYear: int
     description: str = None
     countyDisaggregations: List[CountyDisaggregationWaSSI] = None
