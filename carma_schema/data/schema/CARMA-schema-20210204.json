@@ -105,7 +105,8 @@
       "required": [
         "id",
         "cropYear",
-        "developedAreaYear"
+        "developedAreaYear",
+        "groundwaterWellsCompletedYear"
       ],
       "properties": {
         "id": {
@@ -117,6 +118,10 @@
         },
         "developedAreaYear": {
           "description": "Year of developed area data used to generate WaSSI weights.",
+          "$ref": "#/definitions/Year"
+        },
+        "groundwaterWellsCompletedYear": {
+          "description": "Year during or before which wells were completed to use to generate WaSSI weights.",
           "$ref": "#/definitions/Year"
         },
         "description": {
