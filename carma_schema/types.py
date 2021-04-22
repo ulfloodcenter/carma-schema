@@ -40,6 +40,15 @@ class DevelopedArea:
 
 @dataclass_json
 @dataclass
+class GroundwaterWell:
+    sector: str
+    status: str
+    yearCompleted: int
+    count: int
+
+
+@dataclass_json
+@dataclass
 class SurfaceWeightsWaSSI:
     w1: float
     w2: float

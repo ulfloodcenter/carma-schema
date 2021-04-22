@@ -6,7 +6,7 @@ from dataclasses import asdict
 
 import jsonschema
 
-from carma_schema.types import CropData, DevelopedArea, AnalysisWaSSI
+from carma_schema.types import CropData, DevelopedArea, GroundwaterWell, AnalysisWaSSI
 
 
 DEFINITION_TYPES = [
@@ -53,6 +53,17 @@ def get_developed_area_data_for_entity(entity: dict, year: int) -> DevelopedArea
             developed_area = DevelopedArea(year, da['area'])
             break
     return developed_area
+
+
+def get_well_counts_for_entity(entity: dict, year_completed: int) -> List[GroundwaterWell]:
+    well_counts = []
+    for wc in entity['groundwaterWells']:
+        if wc['yearCompleted'] == year_completed:
+            well_counts.append(GroundwaterWell(wc['sector'],
+                                               wc['status'],
+                                               year_completed,
+                                               wc['count']))
+    return well_counts
 
 
 def get_wassi_analysis_by_id(document: dict, id: UUID) -> AnalysisWaSSI:
