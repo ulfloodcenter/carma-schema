@@ -59,14 +59,40 @@ class SurfaceWeightsWaSSI:
 @dataclass_json
 @dataclass
 class GroundwaterWeightsWaSSI:
-    publicSupply: float
-    domestic: float
-    commercial: float
-    industrial: float
-    powerGeneration: float
-    irrigation: float
-    livestock: float
+    publicSupply: float = 0.0
+    domestic: float = 0.0
+    commercial: float = 0.0
+    industrial: float = 0.0
+    powerGeneration: float = 0.0
+    irrigation: float = 0.0
+    livestock: float = 0.0
 
+    def __setitem__(self, key, value):
+        if key == WELL_SECTORS[0]:
+            self.publicSupply = value
+        elif key == WELL_SECTORS[1]:
+            self.domestic = value
+        elif key == WELL_SECTORS[2]:
+            self.commercial = value
+        elif key == WELL_SECTORS[3]:
+            self.industrial = value
+        elif key == WELL_SECTORS[4]:
+            self.powerGeneration = value
+        elif key == WELL_SECTORS[5]:
+            self.irrigation = value
+        elif key == WELL_SECTORS[6]:
+            self.livestock = value
+        else:
+            super.__setattr__(self, key, value)
+
+    def accum(self, other):
+        self.publicSupply += other.publicSupply
+        self.domestic += other.domestic
+        self.commercial += other.commercial
+        self.industrial += other.industrial
+        self.powerGeneration += other.powerGeneration
+        self.irrigation += other.irrigation
+        self.livestock += other.livestock
 
 @dataclass_json
 @dataclass
