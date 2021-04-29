@@ -242,13 +242,16 @@
     },
     "WaSSI_groundwaterWeights": {
       "type": "object",
-      "required": ["gw1"],
+      "required": [
+        "gw1"
+      ],
       "patternProperties": {
         "^gw1$": {
           "description": "Number of groundwater wells in sub-HUC12 / Number of groundwater wells in county",
           "$ref": "#/definitions/WaSSI_groundwaterWeight"
         }
-      },
+      }
+    },
     "WaSSI_groundwaterWeight": {
       "type": "object",
       "required": [
