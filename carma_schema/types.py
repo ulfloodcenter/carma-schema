@@ -131,7 +131,7 @@ class AnalysisWaSSI:
     cropYear: int
     developedAreaYear: int
     groundwaterWellsCompletedYear: int
+    sectorWeightFactorsSurface: List[SectorWeightFactorSurfaceWaSSI]
+    sectorWeightFactorsGroundwater: List[SectorWeightFactorGroundwaterWaSSI]
     description: str = None
-    sectorWeightFactorsSurface: List[SectorWeightFactorSurfaceWaSSI] = None
-    sectorWeightFactorsGroundwater: List[SectorWeightFactorGroundwaterWaSSI] = None
     countyDisaggregations: List[CountyDisaggregationWaSSI] = None

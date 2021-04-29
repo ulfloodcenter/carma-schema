@@ -106,3 +106,44 @@ class TestTypes(unittest.TestCase):
         self.assertTrue('powerGeneration', keys[4])
         self.assertTrue('irrigation', keys[5])
         self.assertTrue('livestock', keys[6])
+
+    def test_sectorWeightFactors(self):
+        id1 = uuid.uuid4()
+        surface_weight_factors = [
+            SectorWeightFactorSurfaceWaSSI('Irrigation',
+                                               ['w1', 'w2', 'w3']),
+            SectorWeightFactorSurfaceWaSSI('Industrial',
+                                               ['w1', 'w2', 'w4']),
+            SectorWeightFactorSurfaceWaSSI('Public Supply',
+                                               ['w1', 'w4'])
+        ]
+        gw_weight_factors = [
+            SectorWeightFactorGroundwaterWaSSI('Irrigation',
+                                               ['gw1']),
+            SectorWeightFactorGroundwaterWaSSI('Industrial',
+                                               ['gw1']),
+            SectorWeightFactorGroundwaterWaSSI('Public Supply',
+                                               ['gw1']),
+            SectorWeightFactorGroundwaterWaSSI('Domestic',
+                                               ['gw1'])
+        ]
+        wassi1 = AnalysisWaSSI(id1, 2019, 2016, 2020,
+                               surface_weight_factors,
+                               gw_weight_factors)
+        wassi1_dict = asdict(wassi1)
+        self.assertEqual(id1, wassi1_dict['id'])
+        self.assertEqual(2019, wassi1_dict['cropYear'])
+        self.assertEqual(2016, wassi1_dict['developedAreaYear'])
+        self.assertEqual(2020, wassi1_dict['groundwaterWellsCompletedYear'])
+        swf = wassi1_dict['sectorWeightFactorsSurface']
+        self.assertEqual('Irrigation', swf[0]['sector'])
+        swf1 = swf[0]['factors']
+        self.assertEqual('w1', swf1[0])
+        self.assertEqual('w2', swf1[1])
+        self.assertEqual('w3', swf1[2])
+        self.assertEqual('Public Supply', swf[2]['sector'])
+        swf3 = swf[2]['factors']
+        self.assertEqual('w1', swf3[0])
+        self.assertEqual('w4', swf3[1])
+        self.assertIsNone(wassi1_dict['description'])
+        self.assertIsNone(wassi1_dict['countyDisaggregations'])
