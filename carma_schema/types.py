@@ -58,7 +58,7 @@ class SurfaceWeightsWaSSI:
 
 @dataclass_json
 @dataclass
-class GroundwaterWeightsWaSSI:
+class GroundwaterWeightWaSSI:
     publicSupply: float = 0.0
     domestic: float = 0.0
     commercial: float = 0.0
@@ -94,6 +94,13 @@ class GroundwaterWeightsWaSSI:
         self.irrigation += other.irrigation
         self.livestock += other.livestock
 
+
+@dataclass_json
+@dataclass
+class GroundwaterWeightsWaSSI:
+    gw1: GroundwaterWeightWaSSI
+
+
 @dataclass_json
 @dataclass
 class CountyDisaggregationWaSSI:
@@ -105,10 +112,26 @@ class CountyDisaggregationWaSSI:
 
 @dataclass_json
 @dataclass
+class SectorWeightFactorSurfaceWaSSI:
+    sector: str
+    factors: List[str]
+
+
+@dataclass_json
+@dataclass
+class SectorWeightFactorGroundwaterWaSSI:
+    sector: str
+    factors: List[str]
+
+
+@dataclass_json
+@dataclass
 class AnalysisWaSSI:
     id: UUID
     cropYear: int
     developedAreaYear: int
     groundwaterWellsCompletedYear: int
     description: str = None
+    sectorWeightFactorsSurface: List[SectorWeightFactorSurfaceWaSSI] = None
+    sectorWeightFactorsGroundwater: List[SectorWeightFactorGroundwaterWaSSI] = None
     countyDisaggregations: List[CountyDisaggregationWaSSI] = None

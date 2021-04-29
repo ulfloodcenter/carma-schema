@@ -19,10 +19,10 @@ class TestTypes(unittest.TestCase):
 
         county_disagg1 = CountyDisaggregationWaSSI("fakehuc1", "fakecounty1",
                                                    SurfaceWeightsWaSSI(1.2, 3.4, 5.6, 7.8),
-                                                   GroundwaterWeightsWaSSI(1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7))
+                                                   GroundwaterWeightsWaSSI(GroundwaterWeightWaSSI(1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7)))
         county_disagg2 = CountyDisaggregationWaSSI("fakehuc2", "fakecounty2",
                                                    SurfaceWeightsWaSSI(7.8, 5.6, 3.4, 1.2),
-                                                   GroundwaterWeightsWaSSI(7.7, 6.6, 5.5, 4.4, 3.3, 2.2, 1.1))
+                                                   GroundwaterWeightsWaSSI(GroundwaterWeightWaSSI(7.7, 6.6, 5.5, 4.4, 3.3, 2.2, 1.1)))
 
         id2 = uuid.uuid4()
         wassi2 = AnalysisWaSSI(id2, 2019, 2016, 2020, description="Test WaSSI analysis 2",
@@ -50,7 +50,9 @@ class TestTypes(unittest.TestCase):
         self.assertTrue('w2', keys[1])
         self.assertTrue('w3', keys[2])
         self.assertTrue('w4', keys[3])
-        gw1 = cd1_dict['groundwaterWeights']
+        gw_weights = cd1_dict['groundwaterWeights']
+        self.assertTrue(isinstance(gw_weights, dict))
+        gw1 = gw_weights['gw1']
         self.assertTrue(isinstance(gw1, dict))
         self.assertEqual(1.1, gw1['publicSupply'])
         self.assertEqual(2.2, gw1['domestic'])
@@ -84,7 +86,9 @@ class TestTypes(unittest.TestCase):
         self.assertTrue('w2', keys[1])
         self.assertTrue('w3', keys[2])
         self.assertTrue('w4', keys[3])
-        gw2 = cd2_dict['groundwaterWeights']
+        gw_weights2 = cd2_dict['groundwaterWeights']
+        self.assertTrue(isinstance(gw_weights2, dict))
+        gw2 = gw_weights2['gw1']
         self.assertTrue(isinstance(gw2, dict))
         self.assertEqual(7.7, gw2['publicSupply'])
         self.assertEqual(6.6, gw2['domestic'])

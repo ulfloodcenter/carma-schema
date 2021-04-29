@@ -106,7 +106,9 @@
         "id",
         "cropYear",
         "developedAreaYear",
-        "groundwaterWellsCompletedYear"
+        "groundwaterWellsCompletedYear",
+        "sectorWeightFactorsSurface",
+        "sectorWeightFactorsGroundwater"
       ],
       "properties": {
         "id": {
@@ -124,6 +126,24 @@
           "description": "Year during or before which wells were completed to use to generate WaSSI weights.",
           "$ref": "#/definitions/Year"
         },
+        "sectorWeightFactorsSurface": {
+          "description": "Collection weights to be applied for each sector for surface water usage.",
+          "type": "array",
+          "items":{
+            "$ref": "#/definitions/WaSSI_sectorWeightFactorSurface"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "sectorWeightFactorsGroundwater": {
+          "description": "Collection weights to be applied for each sector for groundwater water usage.",
+          "type": "array",
+          "items":{
+            "$ref": "#/definitions/WaSSI_sectorWeightFactorGroundwater"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
         "description": {
           "type": "string",
           "description": "A WaSSI analysis."
@@ -133,6 +153,42 @@
           "type": "array",
           "items":{
             "$ref": "#/definitions/WaSSI_countyDisaggregation"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "WaSSI_sectorWeightFactorSurface": {
+      "type": "object",
+      "required": [
+        "sector",
+        "factors"
+      ],
+      "properties": {
+        "sector": { "$ref": "#/definitions/CARMA_sectors" },
+        "factors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WaSSI_surfaceWeightsEnum"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "WaSSI_sectorWeightFactorGroundwater": {
+      "type": "object",
+      "required": [
+        "sector",
+        "factors"
+      ],
+      "properties": {
+        "sector": { "$ref": "#/definitions/CARMA_sectors" },
+        "factors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WaSSI_groundwaterWeightsEnum"
           },
           "minItems": 1,
           "uniqueItems": true
@@ -185,6 +241,15 @@
       }
     },
     "WaSSI_groundwaterWeights": {
+      "type": "object",
+      "required": ["gw1"],
+      "patternProperties": {
+        "^gw1$": {
+          "description": "Number of groundwater wells in sub-HUC12 / Number of groundwater wells in county",
+          "$ref": "#/definitions/WaSSI_groundwaterWeight"
+        }
+      },
+    "WaSSI_groundwaterWeight": {
       "type": "object",
       "required": [
         "publicSupply",
@@ -519,18 +584,7 @@
         "count"
       ],
       "properties": {
-        "sector": {
-          "type": "string",
-          "enum": [
-            "Public Supply",
-            "Domestic",
-            "Commercial",
-            "Industrial",
-            "Power Generation",
-            "Irrigation",
-            "Livestock"
-          ]
-        },
+        "sector": { "$ref": "#/definitions/CARMA_sectors" },
         "status": {
           "type": "string",
           "enum": [
@@ -691,6 +745,33 @@
         "value": { "$ref": "#/definitions/Value" },
         "unit": { "$ref": "#/definitions/Unit" }
       }
+    },
+    "WaSSI_surfaceWeightsEnum": {
+      "type": "string",
+      "enum": [
+        "w1",
+        "w2",
+        "w3",
+        "w4"
+      ]
+    },
+    "WaSSI_groundwaterWeightsEnum": {
+      "type": "string",
+      "enum": [
+        "gw1"
+      ]
+    },
+    "CARMA_sectors": {
+      "type": "string",
+      "enum": [
+        "Public Supply",
+        "Domestic",
+        "Commercial",
+        "Industrial",
+        "Power Generation",
+        "Irrigation",
+        "Livestock"
+      ]
     },
     "Unit": {
       "type": "object",
