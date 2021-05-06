@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="carma-schema",
-    version="0.0.1",
+    version="0.1.0",
     author="Brian Miles",
     author_email="brian.miles@louisiana.edu",
     description="CARMA schema tools",
