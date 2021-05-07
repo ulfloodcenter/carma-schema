@@ -25,6 +25,22 @@ WELL_STATUS = [
 
 @dataclass_json
 @dataclass
+class WaterUseDataset:
+    entityType: str
+    waterSource: str
+    waterType: str
+    sector: str
+    description: str
+    sourceData: str
+    year: int
+    value: float
+    unit: dict
+    huc12: str = None
+    county: str = None
+
+
+@dataclass_json
+@dataclass
 class CropData:
     year: int
     crop_area: float

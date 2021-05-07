@@ -6,7 +6,7 @@ from dataclasses import asdict
 
 import jsonschema
 
-from carma_schema.types import CropData, DevelopedArea, GroundwaterWell, AnalysisWaSSI
+from carma_schema.types import CropData, DevelopedArea, GroundwaterWell, AnalysisWaSSI, WaterUseDataset
 
 
 DEFINITION_TYPES = [
@@ -35,6 +35,26 @@ def get_county_ids(document: dict) -> List[str]:
     if 'Counties' in document:
         county_list = [h['id'] for h in document['Counties']]
     return county_list
+
+
+def get_water_use_data_for_county(document: dict, county: str, year: int) -> List[WaterUseDataset]:
+    wu_datasets = []
+    if 'WaterUseDatasets' in document:
+        for wud in document['WaterUseDatasets']:
+            if 'county' in wud:
+                if wud['county'] == county and wud['year'] == year:
+                    d = WaterUseDataset(wud['entityType'],
+                                        wud['waterSource'],
+                                        wud['waterType'],
+                                        wud['sector'],
+                                        wud['description'],
+                                        wud['sourceData'],
+                                        year,
+                                        wud['value'],
+                                        wud['unit'],
+                                        county=county)
+                    wu_datasets.append(d)
+    return wu_datasets
 
 
 def get_crop_data_for_entity(entity: dict, year: int) -> CropData:
