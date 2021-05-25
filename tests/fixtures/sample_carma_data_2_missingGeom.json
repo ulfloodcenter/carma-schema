@@ -5,7 +5,9 @@
 			"description": "Anselm Coulee-Vermilion River",
 			"area": 14270.417803582170405,
 			"maxStreamOrder": 5,
+			"minStreamLevel": 1,
 			"meanAnnualFlow": 105,
+			"recharge": 12.4,
 			"crops": [
 				{
 					"year": 2019,
@@ -26,10 +28,48 @@
 			"state": "Louisiana",
 			"county": "Lafayette",
 			"area": 697.23849898,
+			"maxStreamOrder": 3,
+			"minStreamLevel": 1,
+			"meanAnnualFlow": 34.747,
 			"population": [
 				{
 					"year": 2020,
 					"count": 221578
+				}
+			],
+			"crops": [
+				{
+					"year": 2019,
+					"cropArea": 34.37362276276971,
+					"cropAreaDetail": {
+						"Corn": 12.395423572711515,
+						"Soybeans": 18.41814812247691,
+						"Mint": 0.0009886284553127704,
+						"Winter Wheat": 0.6465630097745517,
+						"Rye": 0.002965885365938311,
+						"Alfalfa": 1.6688048325679563,
+						"Other Hay/Non Alfalfa": 0.4725644016395042,
+						"Clover/Wildflowers": 0.004943142276563851,
+						"Fallow/Idle Cropland": 4.929301478189473,
+						"Open Water": 1.3059781894681695,
+						"Developed/Open Space": 5.306957548118951,
+						"Developed/Low Intensity": 2.5368206163325686,
+						"Developed/Med Intensity": 1.39890926426757,
+						"Developed/High Intensity": 0.22244140244537333,
+						"Barren": 0.0632722211400173,
+						"Deciduous Forest": 15.945588355739673,
+						"Evergreen Forest": 0.04053376666782358,
+						"Mixed Forest": 0.0365792528465725,
+						"Shrubland": 0.19772569106255405,
+						"Woody Wetlands": 4.639633340782831,
+						"Herbaceous Wetlands": 0.7632211675014586
+					}
+				}
+			],
+			"developedArea": [
+				{
+					"year": 2016,
+					"area": 120.22441
 				}
 			]
 		}

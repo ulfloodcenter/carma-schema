@@ -12,6 +12,8 @@ def main():
 
     (valid, result) = validate(args.schema, args.document)
     if not valid:
-        sys.exit(f"Validation of {args.document} against schema {args.schema} failed due to the following errors: {result['errors']}")
+        print(f"Validation of {args.document} against schema {args.schema} failed due to the following errors: ")
+        for e in result['errors']:
+            print(f"Path: {e['path']}, error: {e['message']}")
     else:
         print(f"Document {args.document} appears to validate to schema {args.schema}.")

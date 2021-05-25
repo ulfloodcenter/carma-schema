@@ -1,136 +1,19 @@
 {
-	"GroundWaterAvailabilityDatasets": [
+	"Counties": [
 		{
-			"huc12": "https://geoconnex.us/usgs/hydrologic-unit/080801030109",
-			"year": 2002,
-			"description": "This data set represents the mean annual natural groundwater recharge, in millimeters, compiled for every catchment of NHDPlus for the conterminous United States. The source data set is Estimated Mean Annual Natural Ground-Water Recharge in the Conterminous United States (Wolock, 2003).",
-			"sourceData": "https://water.usgs.gov/GIS/metadata/usgswrd/XML/nhd_recharge.xml",
-			"value": 123.45,
-			"unit": {
-				"name": "mm/yr",
-				"primaryDimension": { "name": "Millimeter" },
-				"secondaryDimension": { "name": "Year" }
-			}
-		},
-		{
-			"huc12": "https://geoconnex.us/usgs/hydrologic-unit/080801030305",
-			"year": 2002,
-			"description": "This data set represents the mean annual natural groundwater recharge, in millimeters, compiled for every catchment of NHDPlus for the conterminous United States. The source data set is Estimated Mean Annual Natural Ground-Water Recharge in the Conterminous United States (Wolock, 2003).",
-			"sourceData": "https://water.usgs.gov/GIS/metadata/usgswrd/XML/nhd_recharge.xml",
-			"value": 54.321,
-			"unit": {
-				"name": "mm/yr",
-				"primaryDimension": { "name": "Millimeter" },
-				"secondaryDimension": { "name": "Year" }
-			}
-		}
-	],
-
-	"SurfaceWaterAvailabilityDatasets": [
-		{
-			"huc12":"https://geoconnex.us/usgs/hydrologic-unit/080801030109",
-			"description": "NHDPlus V21 National Seamless Geodatabase, December 4, 2016",
-			"sourceData": "https://www.epa.gov/waterdata/nhdplus-national-data",
-			"year": 2016,
-			"value": 2069.587,
-			"unit": {
-				"name": "cubic meter/sec",
-				"primaryDimension": { "name": "Cubic meter" },
-				"secondaryDimension": { "name": "Second" }
-			}
-		},
-		{
-			"huc12":"https://geoconnex.us/usgs/hydrologic-unit/080801030305",
-			"description": "NHDPlus V21 National Seamless Geodatabase, December 4, 2016",
-			"sourceData": "https://www.epa.gov/waterdata/nhdplus-national-data",
-			"year": 2016,
-			"value": 3029.587,
-			"unit": {
-				"name": "cubic meter/sec",
-				"primaryDimension": { "name": "Cubic meter" },
-				"secondaryDimension": { "name": "Second" }
-			}
-		}
-	],
-
-	"WaterUseDatasets": [
-		{
-			"huc12":"https://geoconnex.us/usgs/hydrologic-unit/080801030109",
-			"useType": { "name": "Ground Water" },
-			"sector": { "name": "Public Supply" },
-			"description": "Water use by public water utilities",
-			"sourceData": "https://waterdata.usgs.gov/la/nwis/water_use?format=rdb&rdb_compression=file&wu_area=County&wu_year=2015&wu_county=001&wu_category=PS&wu_county_nms=Acadia%2BParish&wu_category_nms=Public%2BSupply",
-			"year": 2015,
-			"value": 20.6,
-			"unit" : {
-				"name": "million liter/day",
-				"primaryDimension": { "name": "Million liter" },
-				"secondaryDimension": { "name": "Day" }
-			}
-		},
-		{
-			"huc12":"https://geoconnex.us/usgs/hydrologic-unit/080801030305",
-			"useType": { "name": "Ground Water" },
-			"sector": { "name": "Public Supply" },
-			"description": "Water use by public water utilities",
-			"sourceData": "https://waterdata.usgs.gov/la/nwis/water_use?format=rdb&rdb_compression=file&wu_area=County&wu_year=2015&wu_county=001&wu_category=PS&wu_county_nms=Acadia%2BParish&wu_category_nms=Public%2BSupply",
-			"year": 2015,
-			"value": 42.8,
-			"unit" : {
-				"name": "million liter/day",
-				"primaryDimension": { "name": "Million liter" },
-				"secondaryDimension": { "name": "Day" }
-			}
-		}
-	],
-	
-	"HUC12Watersheds": [
-		{
-			"id": "https://geoconnex.us/usgs/hydrologic-unit/080801030109",
-			"description": "Anselm Coulee-Vermilion River",
-			"area": 47.7692834437,
-			"maxStreamOrder": 4,
-			"meanAnnualFlow": 43.3,
-			"crops": [
-				{
-					"year": 2019,
-					"cropArea": 28.003534901623976,
-					"cropAreaDetail": {
-						"Corn": 12.043564638125678,
-						"Soybeans": 13.46789172810987,
-						"Winter Wheat": 1.2939448598330714,
-						"Alfalfa": 0.7635262417182932,
-						"Other Hay/Non Alfalfa": 0.05630141756525577,
-						"Fallow/Idle Cropland": 0.7358694050195711,
-						"Open Water": 1.5724887151559157,
-						"Developed/Open Space": 2.189828820038106,
-						"Developed/Low Intensity": 0.7417958700264401,
-						"Developed/Med Intensity": 0.103713137620208,
-						"Developed/High Intensity": 0.015803906684984076,
-						"Barren": 0.014816162517172573,
-						"Deciduous Forest": 7.501916954528379,
-						"Evergreen Forest": 0.011852930013738059,
-						"Mixed Forest": 0.008889697510303544,
-						"Shrubland": 0.02469360419528762,
-						"Woody Wetlands": 4.274956758288193,
-						"Herbaceous Wetlands": 0.3783060162718063
-					}
-				}
-			],
-			"developedArea": [
-				{
-					"year": 2016,
-					"area": 0.013828418349361068
-				}
-			],
-			"geometry": {"type": "Polygon", "coordinates": [[[-85.1891468341552, 41.26769471037529], [-85.18814848371525, 41.267399516814635], [-85.18716202635878, 41.26786332887025], [-85.18600715411804, 41.26793813084512]]]}
-		},
-		{
-			"id": "https://geoconnex.us/usgs/hydrologic-unit/080801030305",
-			"description": "Deblane Coulee-Bayou Petite Anse",
-			"area": 83.4313439723,
+			"id": "https://geoconnex.us/ref/counties/22055",
+			"state": "Louisiana",
+			"county": "Lafayette",
+			"area": 697.23849898,
 			"maxStreamOrder": 3,
+			"minStreamLevel": 1,
 			"meanAnnualFlow": 34.747,
+			"population": [
+				{
+					"year": 2020,
+					"count": 221578
+				}
+			],
 			"crops": [
 				{
 					"year": 2019,
@@ -163,22 +46,7 @@
 			"developedArea": [
 				{
 					"year": 2016,
-					"area": 0.22441334093718793
-				}
-			],
-			"geometry": {"type": "Polygon", "coordinates": [[[-85.50124791508625, 41.34289753205802], [-85.49982699308747, 41.342340798943106], [-85.49862574892221, 41.341746690616745], [-85.49637432790331, 41.34033817414546]]]}
-		}
-	],
-	"Counties": [
-		{
-			"id": "https://geoconnex.us/ref/counties/22055",
-			"state": "Louisiana",
-			"county": "Lafayette",
-			"area": 697.23849898,
-			"population": [
-				{
-					"year": 2020,
-					"count": 221578
+					"area": 120.22441
 				}
 			],
 			"geometry": {"type": "MultiPolygon", "coordinates": [[[[-90.56719273910849, 30.643084757618922], [-90.56719273911638, 30.64309475764262], [-90.56718674020803, 30.6444787609383], [-90.56717074348666, 30.648633770828162]]]]}
@@ -188,10 +56,48 @@
 			"state": "Louisiana",
 			"county": "Lafayette",
 			"area": 697.23849898,
+			"maxStreamOrder": 3,
+			"minStreamLevel": 1,
+			"meanAnnualFlow": 34.747,
 			"population": [
 				{
-					"year": 2025,
+					"year": 2020,
 					"count": 221578
+				}
+			],
+			"crops": [
+				{
+					"year": 2019,
+					"cropArea": 34.37362276276971,
+					"cropAreaDetail": {
+						"Corn": 12.395423572711515,
+						"Soybeans": 18.41814812247691,
+						"Mint": 0.0009886284553127704,
+						"Winter Wheat": 0.6465630097745517,
+						"Rye": 0.002965885365938311,
+						"Alfalfa": 1.6688048325679563,
+						"Other Hay/Non Alfalfa": 0.4725644016395042,
+						"Clover/Wildflowers": 0.004943142276563851,
+						"Fallow/Idle Cropland": 4.929301478189473,
+						"Open Water": 1.3059781894681695,
+						"Developed/Open Space": 5.306957548118951,
+						"Developed/Low Intensity": 2.5368206163325686,
+						"Developed/Med Intensity": 1.39890926426757,
+						"Developed/High Intensity": 0.22244140244537333,
+						"Barren": 0.0632722211400173,
+						"Deciduous Forest": 15.945588355739673,
+						"Evergreen Forest": 0.04053376666782358,
+						"Mixed Forest": 0.0365792528465725,
+						"Shrubland": 0.19772569106255405,
+						"Woody Wetlands": 4.639633340782831,
+						"Herbaceous Wetlands": 0.7632211675014586
+					}
+				}
+			],
+			"developedArea": [
+				{
+					"year": 2016,
+					"area": 120.22441
 				}
 			],
 			"geometry": {"type": "MultiPolygon", "coordinates": [[[[-90.56719273910849, 30.643084757618922], [-90.56719273911638, 30.64309475764262], [-90.56718674020803, 30.6444787609383], [-90.56717074348666, 30.648633770828162]]]]}

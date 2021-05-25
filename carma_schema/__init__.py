@@ -17,8 +17,7 @@ DEFINITION_TYPES = [
 ]
 
 DATASET_TYPES = [
-    'GroundWaterAvailabilityDatasets',
-    'SurfaceWaterAvailabilityDatasets',
+    'PowerPlantDatasets',
     'WaterUseDatasets'
 ]
 
@@ -110,6 +109,10 @@ def update_wassi_analysis_instance(document: dict, wassi: AnalysisWaSSI) -> bool
     return False
 
 
+def _error_factory(path: str, message: str) -> dict:
+    return {'path': path, 'message': message}
+
+
 def validate(schema_path: str, document_path: str) -> (bool, dict):
     schema = None
     with open(schema_path, 'r') as f:
@@ -122,7 +125,8 @@ def validate(schema_path: str, document_path: str) -> (bool, dict):
     errors = []
     validator = jsonschema.Draft7Validator(schema)
     for e in validator.iter_errors(document):
-        errors.append(e)
+        errors.append(_error_factory('/' + '/'.join([str(elem) for elem in e.absolute_path]),
+                                     e.message))
 
     # Basic validation against schema failed, bail out before trying higher-order validation
     # (e.g. validating that HUC12 references are correct)
@@ -142,7 +146,9 @@ def validate(schema_path: str, document_path: str) -> (bool, dict):
             if huc12_ids_counter[id] > 1:
                 duplicate_huc12s.append(id)
         if len(duplicate_huc12s) > 0:
-            errors.append(f"Duplicate HUC12 watershed definitions found for: {duplicate_huc12s}")
+            errors.append(_error_factory('/HUC12Watersheds',
+                                         f"Duplicate HUC12 watershed definitions found for: {duplicate_huc12s}")
+                          )
         huc12_ids = set(huc12_ids_list)
 
     if 'Counties' not in document:
@@ -157,39 +163,41 @@ def validate(schema_path: str, document_path: str) -> (bool, dict):
             if county_counter[id] > 1:
                 duplicate_counties.append(id)
         if len(duplicate_counties) > 0:
-            errors.append(f"Duplicate county definitions found for: {duplicate_counties}")
+            errors.append(_error_factory('/Counties',
+                                         f"Duplicate county definitions found for: {duplicate_counties}")
+                          )
         county_ids = set(county_list)
 
     if not (huc12_present or counties_present):
-        errors.append(f"Neither HUC12Watersheds nor Counties encountered in document {document_path}, "
-                      "when at least one must be present")
+        errors.append(_error_factory('/',
+                                     (f"Neither HUC12Watersheds nor Counties encountered in document {document_path}, "
+                                     "when at least one must be present"))
+                      )
 
-    # Make sure that HUC-12s and county ID references from: GroundWaterAvailabilityDatasets,
-    # SurfaceWaterAvailabilityDatasets, WaterUseDatasets
-    # GroundWaterAvailabilityDatasets are actually defined.
+    # Make sure that HUC-12s and county ID references from WaterUseDatasets are actually defined.
     for dataset_type in DATASET_TYPES:
         # Validate HUC-12 IDs
         undef_huc12 = set()
-        try:
-            dataset_huc12s = [d['huc12'] for d in document[dataset_type]]
-            for huc in dataset_huc12s:
-                if huc not in huc12_ids:
-                    undef_huc12.add(huc)
-        except KeyError:
-            pass
-        if len(undef_huc12):
-            errors.append(f"Undefined HUC12s encountered in {dataset_type}: {undef_huc12}")
-        # Validate county IDs
         undef_county = set()
-        try:
-            dataset_counties = [d['county'] for d in document[dataset_type]]
-            for county in dataset_counties:
-                if county not in county_ids:
-                    undef_county.add(county)
-        except KeyError:
-            pass
-        if len(undef_county):
-            errors.append(f"Undefined counties encountered in {dataset_type}: {undef_county}")
+        if dataset_type in document:
+            for d in document[dataset_type]:
+                if 'huc12' in d:
+                    huc = d['huc12']
+                    if huc not in huc12_ids:
+                        undef_huc12.add(huc)
+                if 'county' in d:
+                    county = d['county']
+                    if county not in county_ids:
+                        undef_county.add(county)
+
+            if len(undef_huc12):
+                errors.append(_error_factory('/' + dataset_type,
+                                             f"Undefined HUC12s encountered in {dataset_type}: {undef_huc12}")
+                              )
+            if len(undef_county):
+                errors.append(_error_factory('/' + dataset_type,
+                                             f"Undefined counties encountered in {dataset_type}: {undef_county}")
+                              )
 
     if len(errors) > 0:
         return False, {'errors': errors, 'document': document}

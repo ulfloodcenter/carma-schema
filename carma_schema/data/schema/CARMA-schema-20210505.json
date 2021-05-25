@@ -29,18 +29,10 @@
       "minItems": 1,
       "uniqueItems": true
     },
-    "GroundWaterAvailabilityDatasets": {
+    "PowerPlantDatasets": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/GroundWaterAvailabilityDataset"
-      },
-      "minItems": 1,
-      "uniqueItems": true
-    },
-    "SurfaceWaterAvailabilityDatasets": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/SurfaceWaterAvailabilityDataset"
+        "$ref": "#/definitions/PowerPlantDataset"
       },
       "minItems": 1,
       "uniqueItems": true
@@ -85,7 +77,6 @@
       "enum": [
         "Surface Water",
         "Groundwater",
-        "Reclaimed",
         "Plant Discharge Water",
         "All",
         "Other",
@@ -634,48 +625,76 @@
         }
       }
     },
-    "GroundWaterAvailabilityDataset": {
+    "PowerPlantDataset": {
       "type": "object",
       "required": [
         "huc12",
-        "description",
-        "sourceData",
-        "year",
-        "value",
-        "unit"
+        "eiaPlantCode",
+        "eiaLongitude",
+        "eiaLatitude",
+        "waterSource",
+        "waterType",
+        "consumptionUnit",
+        "withdrawalUnit",
+        "usgsConsumption",
+        "usgsWithdrawal"
       ],
       "properties": {
         "huc12": { "$ref": "#/definitions/HUC12ID" },
-        "description": {
-          "type": "string",
-          "description": "A description of the groundwater dataset"
+        "eiaPlantCode": {
+          "type": "integer",
+          "minimum": 1
         },
-        "sourceData": { "$ref": "#/definitions/URL" },
-        "year": { "$ref": "#/definitions/Year" },
-        "value": { "$ref": "#/definitions/Value" },
-        "unit": { "$ref": "#/definitions/Unit" }
+        "eiaLongitude": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "eiaLatitude": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "generatorType": {
+          "type": "string",
+          "enum": [
+            "COMPLEX",
+            "GAS STEAM",
+            "COAL",
+            "NUCLEAR",
+            "NGCC",
+            "OIL",
+            "BIOMASS",
+            "OIL CC"
+          ]
+        },
+        "waterSource": { "$ref": "#/definitions/WaterSource" },
+        "waterType": { "$ref": "#/definitions/WaterType" },
+        "consumptionUnit": { "$ref": "#/definitions/Unit" },
+        "withdrawalUnit": { "$ref": "#/definitions/Unit" },
+        "usgsConsumption": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ConsumptionOrWithdrawalDatum" },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "usgsWithdrawal": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ConsumptionOrWithdrawalDatum" },
+          "minItems": 1,
+          "uniqueItems": true
+        }
       }
     },
-    "SurfaceWaterAvailabilityDataset": {
+    "ConsumptionOrWithdrawalDatum": {
       "type": "object",
       "required": [
-        "huc12",
-        "description",
-        "sourceData",
         "year",
-        "value",
-        "unit"
+        "value"
       ],
       "properties": {
-        "huc12": { "$ref": "#/definitions/HUC12ID" },
-        "description": {
-          "type": "string",
-          "description": "A description of the surface water dataset"
-        },
-        "sourceData": { "$ref": "#/definitions/URL" },
         "year": { "$ref": "#/definitions/Year" },
-        "value": { "$ref": "#/definitions/Value" },
-        "unit": { "$ref": "#/definitions/Unit" }
+        "value": { "$ref": "#/definitions/Value" }
       }
     },
     "WaterUseDataset": {

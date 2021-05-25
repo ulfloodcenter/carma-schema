@@ -1,96 +1,139 @@
 {
-	"GroundWaterAvailabilityDatasets": [
-		{
-			"huc12": "https://geoconnex.us/usgs/hydrologic-unit/080801030109",
-			"year": 2002,
-			"description": "This data set represents the mean annual natural groundwater recharge, in millimeters, compiled for every catchment of NHDPlus for the conterminous United States. The source data set is Estimated Mean Annual Natural Ground-Water Recharge in the Conterminous United States (Wolock, 2003).",
-			"sourceData": "https://water.usgs.gov/GIS/metadata/usgswrd/XML/nhd_recharge.xml",
-			"value": -123.45,
-			"unit": {
-				"name": "mm/yr",
-				"primaryDimension": { "name": "Millimeter" },
-				"secondaryDimension": { "name": "Year" }
-			}
-		},
-		{
-			"huc12": "https://geoconnex.us/usgs/hydrologic-unit/080801030305",
-			"year": 2002,
-			"description": "This data set represents the mean annual natural groundwater recharge, in millimeters, compiled for every catchment of NHDPlus for the conterminous United States. The source data set is Estimated Mean Annual Natural Ground-Water Recharge in the Conterminous United States (Wolock, 2003).",
-			"sourceData": "https://water.usgs.gov/GIS/metadata/usgswrd/XML/nhd_recharge.xml",
-			"value": 54.321,
-			"unit": {
-				"name": "mm/yr",
-				"primaryDimension": { "name": "Millimeter" },
-				"secondaryDimension": { "name": "Year" }
-			}
-		}
-	],
-
-	"SurfaceWaterAvailabilityDatasets": [
+	"PowerPlantDatasets": [
 		{
 			"huc12":"https://geoconnex.us/usgs/hydrologic-unit/080801030109",
-			"description": "NHDPlus V21 National Seamless Geodatabase, December 4, 2016",
-			"sourceData": "https://www.epa.gov/waterdata/nhdplus-national-data",
-			"year": 2016,
-			"value": 0,
-			"unit": {
-				"name": "cubic meter/sec",
-				"primaryDimension": { "name": "Cubic meter" },
-				"secondaryDimension": { "name": "Second" }
-			}
+			"eiaPlantCode": 4,
+			"eiaLongitude": -188.01089992,
+			"eiaLatitude": 31.0069640406,
+			"generatorType": "COMPLEX",
+			"waterSource": "Surface Water",
+			"waterType": "Brackish",
+			"consumptionUnit": {"name": "Mgal/d",
+				"primaryDimension": "Million",
+				"secondaryDimension": "Gallon",
+				"tertiaryDimension": "Day"},
+			"withdrawalUnit": {"name": "Mgal/d",
+				"primaryDimension": "Million",
+				"secondaryDimension": "Gallon",
+				"tertiaryDimension": "Day"},
+			"usgsConsumption": [
+				{"year":  2010, "value": 11.10 },
+				{"year":  2015, "value": 7.93 }
+			],
+			"usgsWithdrawal": [
+				{"year":  2010, "value": 692 },
+				{"year":  2015, "value": 412 }
+			]
 		},
 		{
-			"huc12":"https://geoconnex.us/usgs/hydrologic-unit/080801030305",
-			"description": "NHDPlus V21 National Seamless Geodatabase, December 4, 2016",
-			"sourceData": "https://www.epa.gov/waterdata/nhdplus-national-data",
-			"year": 2016,
-			"value": -3029.587,
-			"unit": {
-				"name": "cubic meter/sec",
-				"primaryDimension": { "name": "Cubic meter" },
-				"secondaryDimension": { "name": "Second" }
-			}
+			"huc12":"https://geoconnex.us/usgs/hydrologic-unit/080801030109",
+			"eiaPlantCode": 7,
+			"eiaLongitude": -85.9702777777778,
+			"eiaLatitude": 34.0136111111111,
+			"generatorType": "COAL",
+			"waterSource": "Groundwater",
+			"waterType": "Fresh",
+			"consumptionUnit": {"name": "Mgal/d",
+				"primaryDimension": "Million",
+				"secondaryDimension": "Gallon",
+				"tertiaryDimension": "Day"},
+			"withdrawalUnit": {"name": "Mgal/d",
+				"primaryDimension": "Million",
+				"secondaryDimension": "Gallon",
+				"tertiaryDimension": "Day"},
+			"usgsConsumption": [
+				{"year":  2010, "value": 0.43 },
+				{"year":  2015, "value": 0.26 }
+			],
+			"usgsWithdrawal": [
+				{"year":  2010, "value": 39.5 },
+				{"year":  2015, "value": 24.4 }
+			]
+		},
+		{
+			"huc12":"https://geoconnex.us/usgs/hydrologic-unit/080801030109",
+			"eiaPlantCode": 8,
+			"eiaLongitude": -87.1997428644,
+			"eiaLatitude": 33.6446938804,
+			"generatorType": "NGCC",
+			"waterSource": "Plant Discharge Water",
+			"waterType": "Reclaimed",
+			"consumptionUnit": {"name": "Mgal/d",
+				"primaryDimension": "Million",
+				"secondaryDimension": "Gallon",
+				"tertiaryDimension": "Day"},
+			"withdrawalUnit": {"name": "Mgal/d",
+				"primaryDimension": "Million",
+				"secondaryDimension": "Gallon",
+				"tertiaryDimension": "Day"},
+			"usgsConsumption": [
+				{"year":  2010, "value": 6.36 },
+				{"year":  2015, "value": 4.02 }
+			],
+			"usgsWithdrawal": [
+				{"year":  2010, "value": 598 },
+				{"year":  2015, "value": 382 }
+			]
 		}
 	],
 
 	"WaterUseDatasets": [
 		{
 			"huc12":"https://geoconnex.us/usgs/hydrologic-unit/080801030109",
-			"useType": { "name": "Ground Water" },
-			"sector": { "name": "Public Supply" },
+			"entityType": "Water",
+			"waterSource": "Groundwater",
+			"waterType": "Fresh",
+			"sector": "Public Supply",
 			"description": "Water use by public water utilities",
 			"sourceData": "https://waterdata.usgs.gov/la/nwis/water_use?format=rdb&rdb_compression=file&wu_area=County&wu_year=2015&wu_county=001&wu_category=PS&wu_county_nms=Acadia%2BParish&wu_category_nms=Public%2BSupply",
 			"year": 2015,
-			"value": -20.6,
-			"unit" : {
-				"name": "million liter/day",
-				"primaryDimension": { "name": "Million liter" },
-				"secondaryDimension": { "name": "Day" }
-			}
+			"value": 20.6,
+			"unit" : {"name": "Mgal/d",
+                     "primaryDimension": "Million",
+                     "secondaryDimension": "Gallon",
+                     "tertiaryDimension": "Day"}
 		},
 		{
 			"huc12":"https://geoconnex.us/usgs/hydrologic-unit/080801030305",
-			"useType": { "name": "Ground Water" },
-			"sector": { "name": "Public Supply" },
+			"entityType": "Water",
+			"waterSource": "Surface Water",
+			"waterType": "Saline",
+			"sector": "Public Supply",
 			"description": "Water use by public water utilities",
 			"sourceData": "https://waterdata.usgs.gov/la/nwis/water_use?format=rdb&rdb_compression=file&wu_area=County&wu_year=2015&wu_county=001&wu_category=PS&wu_county_nms=Acadia%2BParish&wu_category_nms=Public%2BSupply",
 			"year": 2015,
-			"value": 0,
-			"unit" : {
-				"name": "million liter/day",
-				"primaryDimension": { "name": "Million liter" },
-				"secondaryDimension": { "name": "Day" }
-			}
+			"value": 42.8,
+			"unit" : {"name": "Mgal/d",
+                     "primaryDimension": "Million",
+                     "secondaryDimension": "Gallon",
+                     "tertiaryDimension": "Day"}
+		},
+		{
+			"county":"https://geoconnex.us/ref/counties/22055",
+			"entityType": "Water",
+			"waterSource": "Plant Discharge Water",
+			"waterType": "Reclaimed",
+			"sector": "Public Supply",
+			"description": "Water use by public water utilities",
+			"sourceData": "https://waterdata.usgs.gov/la/nwis/water_use?format=rdb&rdb_compression=file&wu_area=County&wu_year=2015&wu_county=001&wu_category=PS&wu_county_nms=Acadia%2BParish&wu_category_nms=Public%2BSupply",
+			"year": 2015,
+			"value": 23.9,
+			"unit" : {"name": "Mgal/d",
+                     "primaryDimension": "Million",
+                     "secondaryDimension": "Gallon",
+                     "tertiaryDimension": "Day"}
 		}
 	],
-	
+
 	"HUC12Watersheds": [
 		{
 			"id": "https://geoconnex.us/usgs/hydrologic-unit/080801030109",
 			"description": "Anselm Coulee-Vermilion River",
 			"area": 47.7692834437,
 			"maxStreamOrder": 4,
+			"minStreamLevel": 1,
 			"meanAnnualFlow": 43.3,
+			"recharge": 12.4,
 			"crops": [
 				{
 					"year": 2019,
@@ -130,7 +173,9 @@
 			"description": "Deblane Coulee-Bayou Petite Anse",
 			"area": 83.4313439723,
 			"maxStreamOrder": 3,
+			"minStreamLevel": 1,
 			"meanAnnualFlow": 34.747,
+			"recharge": 20.27,
 			"crops": [
 				{
 					"year": 2019,
@@ -175,10 +220,99 @@
 			"state": "Louisiana",
 			"county": "Lafayette",
 			"area": 697.23849898,
+			"maxStreamOrder": 3,
+			"minStreamLevel": 1,
+			"meanAnnualFlow": 34.747,
 			"population": [
 				{
 					"year": 2020,
 					"count": 221578
+				}
+			],
+			"crops": [
+				{
+					"year": 2019,
+					"cropArea": 34.37362276276971,
+					"cropAreaDetail": {
+						"Corn": 12.395423572711515,
+						"Soybeans": 18.41814812247691,
+						"Mint": 0.0009886284553127704,
+						"Winter Wheat": 0.6465630097745517,
+						"Rye": 0.002965885365938311,
+						"Alfalfa": 1.6688048325679563,
+						"Other Hay/Non Alfalfa": 0.4725644016395042,
+						"Clover/Wildflowers": 0.004943142276563851,
+						"Fallow/Idle Cropland": 4.929301478189473,
+						"Open Water": 1.3059781894681695,
+						"Developed/Open Space": 5.306957548118951,
+						"Developed/Low Intensity": 2.5368206163325686,
+						"Developed/Med Intensity": 1.39890926426757,
+						"Developed/High Intensity": 0.22244140244537333,
+						"Barren": 0.0632722211400173,
+						"Deciduous Forest": 15.945588355739673,
+						"Evergreen Forest": 0.04053376666782358,
+						"Mixed Forest": 0.0365792528465725,
+						"Shrubland": 0.19772569106255405,
+						"Woody Wetlands": 4.639633340782831,
+						"Herbaceous Wetlands": 0.7632211675014586
+					}
+				}
+			],
+			"developedArea": [
+				{
+					"year": 2016,
+					"area": 120.22441
+				}
+			],
+			"geometry": {"type": "MultiPolygon", "coordinates": [[[[-90.56719273910849, 30.643084757618922], [-90.56719273911638, 30.64309475764262], [-90.56718674020803, 30.6444787609383], [-90.56717074348666, 30.648633770828162]]]]}
+		},
+		{
+			"id": "https://geoconnex.us/ref/counties/22021",
+			"state": "Louisiana",
+			"county": "Caldwell",
+			"area": 1400.4812596,
+			"maxStreamOrder": -3,
+			"minStreamLevel": 1,
+			"meanAnnualFlow": 34.747,
+			"population": [
+				{
+					"year": 2020,
+					"count": 10132
+				}
+			],
+			"crops": [
+				{
+					"year": 2019,
+					"cropArea": 34.37362276276971,
+					"cropAreaDetail": {
+						"Corn": 12.395423572711515,
+						"Soybeans": 18.41814812247691,
+						"Mint": 0.0009886284553127704,
+						"Winter Wheat": 0.6465630097745517,
+						"Rye": 0.002965885365938311,
+						"Alfalfa": 1.6688048325679563,
+						"Other Hay/Non Alfalfa": 0.4725644016395042,
+						"Clover/Wildflowers": 0.004943142276563851,
+						"Fallow/Idle Cropland": 4.929301478189473,
+						"Open Water": 1.3059781894681695,
+						"Developed/Open Space": 5.306957548118951,
+						"Developed/Low Intensity": 2.5368206163325686,
+						"Developed/Med Intensity": 1.39890926426757,
+						"Developed/High Intensity": 0.22244140244537333,
+						"Barren": 0.0632722211400173,
+						"Deciduous Forest": 15.945588355739673,
+						"Evergreen Forest": 0.04053376666782358,
+						"Mixed Forest": 0.0365792528465725,
+						"Shrubland": 0.19772569106255405,
+						"Woody Wetlands": 4.639633340782831,
+						"Herbaceous Wetlands": 0.7632211675014586
+					}
+				}
+			],
+			"developedArea": [
+				{
+					"year": 2016,
+					"area": 456.22441334
 				}
 			],
 			"geometry": {"type": "MultiPolygon", "coordinates": [[[[-90.56719273910849, 30.643084757618922], [-90.56719273911638, 30.64309475764262], [-90.56718674020803, 30.6444787609383], [-90.56717074348666, 30.648633770828162]]]]}
