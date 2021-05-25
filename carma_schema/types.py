@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 from uuid import UUID
+from decimal import Decimal
 
 from dataclasses_json import dataclass_json
 
@@ -21,6 +22,15 @@ WELL_STATUS = [
     "Destroyed",
     "Inactive"
 ]
+
+
+@dataclass_json
+@dataclass
+class Unit:
+    name: str
+    primaryDimension: str
+    secondaryDimension: str
+    tertiaryDimension: str
 
 
 @dataclass_json
@@ -61,6 +71,28 @@ class GroundwaterWell:
     status: str
     yearCompleted: int
     count: int
+
+
+@dataclass_json
+@dataclass
+class ConsumptionOrWithdrawalDatum:
+    year: int
+    value: float
+
+
+@dataclass_json
+@dataclass
+class PowerPlantDataset:
+    huc12: str
+    eiaPlantCode: int
+    eiaLongitude: Decimal
+    eiaLatitude: Decimal
+    waterSource: str
+    waterType: str
+    consumptionUnit: Unit
+    withdrawalUnit: Unit
+    usgsConsumption: ConsumptionOrWithdrawalDatum
+    usgsWithdrawal: ConsumptionOrWithdrawalDatum
 
 
 @dataclass_json
