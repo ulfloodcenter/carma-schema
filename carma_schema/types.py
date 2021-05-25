@@ -83,16 +83,16 @@ class ConsumptionOrWithdrawalDatum:
 @dataclass_json
 @dataclass
 class PowerPlantDataset:
-    huc12: str
     eiaPlantCode: int
     eiaLongitude: Decimal
     eiaLatitude: Decimal
-    waterSource: str
-    waterType: str
-    consumptionUnit: Unit
-    withdrawalUnit: Unit
-    usgsConsumption: ConsumptionOrWithdrawalDatum
-    usgsWithdrawal: ConsumptionOrWithdrawalDatum
+    huc12: str = None
+    waterSource: str = None
+    waterType: str = None
+    consumptionUnit: Unit = None
+    withdrawalUnit: Unit = None
+    usgsConsumption: List[ConsumptionOrWithdrawalDatum] = None
+    usgsWithdrawal: List[ConsumptionOrWithdrawalDatum] = None
 
 
 @dataclass_json
