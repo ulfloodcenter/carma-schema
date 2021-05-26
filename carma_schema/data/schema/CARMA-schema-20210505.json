@@ -632,8 +632,6 @@
         "eiaPlantCode",
         "eiaLongitude",
         "eiaLatitude",
-        "waterSource",
-        "waterType",
         "consumptionUnit",
         "withdrawalUnit",
         "usgsConsumption",
@@ -668,8 +666,6 @@
             "OIL CC"
           ]
         },
-        "waterSource": { "$ref": "#/definitions/WaterSource" },
-        "waterType": { "$ref": "#/definitions/WaterType" },
         "consumptionUnit": { "$ref": "#/definitions/Unit" },
         "withdrawalUnit": { "$ref": "#/definitions/Unit" },
         "usgsConsumption": {
@@ -690,11 +686,15 @@
       "type": "object",
       "required": [
         "year",
-        "value"
+        "value",
+        "waterSource",
+        "waterType"
       ],
       "properties": {
         "year": { "$ref": "#/definitions/Year" },
-        "value": { "$ref": "#/definitions/Value" }
+        "value": { "$ref": "#/definitions/Value" },
+        "waterSource": { "$ref": "#/definitions/WaterSource" },
+        "waterType": { "$ref": "#/definitions/WaterType" }
       }
     },
     "WaterUseDataset": {

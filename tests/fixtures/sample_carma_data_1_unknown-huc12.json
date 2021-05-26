@@ -6,8 +6,6 @@
 			"eiaLongitude": -88.01089992,
 			"eiaLatitude": 31.0069640406,
 			"generatorType": "COMPLEX",
-			"waterSource": "Surface Water",
-			"waterType": "Brackish",
 			"consumptionUnit": {"name": "Mgal/d",
 				"primaryDimension": "Million",
 				"secondaryDimension": "Gallon",
@@ -17,12 +15,32 @@
 				"secondaryDimension": "Gallon",
 				"tertiaryDimension": "Day"},
 			"usgsConsumption": [
-				{"year":  2010, "value": 11.10 },
-				{"year":  2015, "value": 7.93 }
+				{
+					"year":  2010,
+					"value": 11.10,
+					"waterSource": "Surface Water",
+					"waterType": "Brackish"
+				},
+				{
+					"year":  2015,
+					"value": 7.93,
+					"waterSource": "Surface Water",
+					"waterType": "Brackish"
+				}
 			],
 			"usgsWithdrawal": [
-				{"year":  2010, "value": 692 },
-				{"year":  2015, "value": 412 }
+				{
+					"year":  2010,
+					"value": 692,
+					"waterSource": "Surface Water",
+					"waterType": "Brackish"
+				},
+				{
+					"year":  2015,
+					"value": 412,
+					"waterSource": "Surface Water",
+					"waterType": "Brackish"
+				}
 			]
 		},
 		{
@@ -31,8 +49,6 @@
 			"eiaLongitude": -85.9702777777778,
 			"eiaLatitude": 34.0136111111111,
 			"generatorType": "COAL",
-			"waterSource": "Groundwater",
-			"waterType": "Fresh",
 			"consumptionUnit": {"name": "Mgal/d",
 				"primaryDimension": "Million",
 				"secondaryDimension": "Gallon",
@@ -42,12 +58,32 @@
 				"secondaryDimension": "Gallon",
 				"tertiaryDimension": "Day"},
 			"usgsConsumption": [
-				{"year":  2010, "value": 0.43 },
-				{"year":  2015, "value": 0.26 }
+				{
+					"year":  2010,
+					"value": 0.43,
+					"waterSource": "Groundwater",
+					"waterType": "Fresh"
+				},
+				{
+					"year":  2015,
+					"value": 0.26,
+					"waterSource": "Groundwater",
+					"waterType": "Fresh"
+				}
 			],
 			"usgsWithdrawal": [
-				{"year":  2010, "value": 39.5 },
-				{"year":  2015, "value": 24.4 }
+				{
+					"year":  2010,
+					"value": 39.5,
+					"waterSource": "Groundwater",
+					"waterType": "Fresh"
+				},
+				{
+					"year":  2015,
+					"value": 24.4,
+					"waterSource": "Groundwater",
+					"waterType": "Fresh"
+				}
 			]
 		},
 		{
@@ -67,12 +103,32 @@
 				"secondaryDimension": "Gallon",
 				"tertiaryDimension": "Day"},
 			"usgsConsumption": [
-				{"year":  2010, "value": 6.36 },
-				{"year":  2015, "value": 4.02 }
+				{
+					"year":  2010,
+					"value": 6.36,
+					"waterSource": "Plant Discharge Water",
+					"waterType": "Reclaimed"
+				},
+				{
+					"year":  2015,
+					"value": 4.02,
+					"waterSource": "Plant Discharge Water",
+					"waterType": "Reclaimed"
+				}
 			],
 			"usgsWithdrawal": [
-				{"year":  2010, "value": 598 },
-				{"year":  2015, "value": 382 }
+				{
+					"year":  2010,
+					"value": 598,
+					"waterSource": "Plant Discharge Water",
+					"waterType": "Reclaimed"
+				},
+				{
+					"year":  2015,
+					"value": 382,
+					"waterSource": "Plant Discharge Water",
+					"waterType": "Reclaimed"
+				}
 			]
 		}
 	],
