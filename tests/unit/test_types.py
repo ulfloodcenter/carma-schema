@@ -1,6 +1,7 @@
 import unittest
 from dataclasses import asdict
 import uuid
+from decimal import Decimal
 
 from carma_schema.types import *
 
@@ -147,6 +148,22 @@ class TestTypes(unittest.TestCase):
         self.assertEqual('w4', swf3[1])
         self.assertIsNone(wassi1_dict['description'])
         self.assertIsNone(wassi1_dict['countyDisaggregations'])
+
+    def test_PowerPlantDataset(self):
+        p = PowerPlantDataset(4223, -80.00, 40.00)
+        self.assertEqual(4223, p.eiaPlantCode)
+        self.assertEqual(-80.00, p.eiaLongitude)
+        self.assertEqual(40.00, p.eiaLatitude)
+        u = p.consumptionUnit
+        self.assertEqual("Mgal/d", u.name)
+        self.assertEqual("Million", u.primaryDimension)
+        self.assertEqual("Gallon", u.secondaryDimension)
+        self.assertEqual("Day", u.tertiaryDimension)
+        u = p.withdrawalUnit
+        self.assertEqual("Mgal/d", u.name)
+        self.assertEqual("Million", u.primaryDimension)
+        self.assertEqual("Gallon", u.secondaryDimension)
+        self.assertEqual("Day", u.tertiaryDimension)
 
     def test_ConsumptionOrWithdrawalDatum(self):
         c1 = ConsumptionOrWithdrawalDatum(2015, 42.23, 'GW & SW', 'FR & BE')

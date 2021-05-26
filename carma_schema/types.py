@@ -52,6 +52,11 @@ class Unit:
     tertiaryDimension: str
 
 
+DEFAULT_USAGE_CONSUMPTION_UNIT = Unit("Mgal/d",
+                                      "Million",
+                                      "Gallon",
+                                      "Day")
+
 @dataclass_json
 @dataclass
 class WaterUseDataset:
@@ -128,11 +133,11 @@ class ConsumptionOrWithdrawalDatum:
 @dataclass
 class PowerPlantDataset:
     eiaPlantCode: int
-    eiaLongitude: Decimal
-    eiaLatitude: Decimal
+    eiaLongitude: float
+    eiaLatitude: float
+    consumptionUnit: Unit = DEFAULT_USAGE_CONSUMPTION_UNIT
+    withdrawalUnit: Unit = DEFAULT_USAGE_CONSUMPTION_UNIT
     huc12: str = None
-    consumptionUnit: Unit = None
-    withdrawalUnit: Unit = None
     usgsConsumption: List[ConsumptionOrWithdrawalDatum] = None
     usgsWithdrawal: List[ConsumptionOrWithdrawalDatum] = None
 
