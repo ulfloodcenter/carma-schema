@@ -671,13 +671,13 @@
         "usgsConsumption": {
           "type": "array",
           "items": { "$ref": "#/definitions/ConsumptionOrWithdrawalDatum" },
-          "minItems": 1,
+          "minItems": 0,
           "uniqueItems": true
         },
         "usgsWithdrawal": {
           "type": "array",
           "items": { "$ref": "#/definitions/ConsumptionOrWithdrawalDatum" },
-          "minItems": 1,
+          "minItems": 0,
           "uniqueItems": true
         }
       }
