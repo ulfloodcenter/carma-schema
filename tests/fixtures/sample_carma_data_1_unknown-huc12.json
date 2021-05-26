@@ -18,28 +18,28 @@
 				{
 					"year":  2010,
 					"value": 11.10,
-					"waterSource": "Surface Water",
-					"waterType": "Brackish"
+					"waterSource": ["Surface Water"],
+					"waterType": ["Brackish"]
 				},
 				{
 					"year":  2015,
 					"value": 7.93,
-					"waterSource": "Surface Water",
-					"waterType": "Brackish"
+					"waterSource": ["Surface Water"],
+					"waterType": ["Brackish"]
 				}
 			],
 			"usgsWithdrawal": [
 				{
 					"year":  2010,
 					"value": 692,
-					"waterSource": "Surface Water",
-					"waterType": "Brackish"
+					"waterSource": ["Surface Water"],
+					"waterType": ["Brackish"]
 				},
 				{
 					"year":  2015,
 					"value": 412,
-					"waterSource": "Surface Water",
-					"waterType": "Brackish"
+					"waterSource": ["Surface Water"],
+					"waterType": ["Brackish"]
 				}
 			]
 		},
@@ -61,28 +61,28 @@
 				{
 					"year":  2010,
 					"value": 0.43,
-					"waterSource": "Groundwater",
-					"waterType": "Fresh"
+					"waterSource": ["Groundwater"],
+					"waterType": ["Fresh"]
 				},
 				{
 					"year":  2015,
 					"value": 0.26,
-					"waterSource": "Groundwater",
-					"waterType": "Fresh"
+					"waterSource": ["Groundwater"],
+					"waterType": ["Fresh"]
 				}
 			],
 			"usgsWithdrawal": [
 				{
 					"year":  2010,
 					"value": 39.5,
-					"waterSource": "Groundwater",
-					"waterType": "Fresh"
+					"waterSource": ["Groundwater"],
+					"waterType": ["Fresh"]
 				},
 				{
 					"year":  2015,
 					"value": 24.4,
-					"waterSource": "Groundwater",
-					"waterType": "Fresh"
+					"waterSource": ["Groundwater"],
+					"waterType": ["Fresh"]
 				}
 			]
 		},
@@ -106,28 +106,28 @@
 				{
 					"year":  2010,
 					"value": 6.36,
-					"waterSource": "Plant Discharge Water",
-					"waterType": "Reclaimed"
+					"waterSource": ["Plant Discharge Water"],
+					"waterType": ["Reclaimed"]
 				},
 				{
 					"year":  2015,
 					"value": 4.02,
-					"waterSource": "Plant Discharge Water",
-					"waterType": "Reclaimed"
+					"waterSource": ["Plant Discharge Water"],
+					"waterType": ["Reclaimed"]
 				}
 			],
 			"usgsWithdrawal": [
 				{
 					"year":  2010,
 					"value": 598,
-					"waterSource": "Plant Discharge Water",
-					"waterType": "Reclaimed"
+					"waterSource": ["Plant Discharge Water"],
+					"waterType": ["Reclaimed"]
 				},
 				{
 					"year":  2015,
 					"value": 382,
-					"waterSource": "Plant Discharge Water",
-					"waterType": "Reclaimed"
+					"waterSource": ["Plant Discharge Water"],
+					"waterType": ["Reclaimed"]
 				}
 			]
 		}

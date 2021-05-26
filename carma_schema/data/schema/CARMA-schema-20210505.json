@@ -693,8 +693,22 @@
       "properties": {
         "year": { "$ref": "#/definitions/Year" },
         "value": { "$ref": "#/definitions/Value" },
-        "waterSource": { "$ref": "#/definitions/WaterSource" },
-        "waterType": { "$ref": "#/definitions/WaterType" }
+        "waterSource": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WaterSource"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "waterType": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WaterType"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
       }
     },
     "WaterUseDataset": {
