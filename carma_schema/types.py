@@ -23,6 +23,25 @@ WELL_STATUS = [
     "Inactive"
 ]
 
+WATER_SOURCE_MAPPING = {
+    'SW': 'Surface Water',
+    'GW': 'Groundwater',
+    'PD': 'Plant Discharge Water',
+    'OT': 'Other',
+    '-nr-': 'Not reported',
+}
+WATER_SOURCE_MAPPING_NA = 'N/A'
+
+WATER_TYPE_MAPPING = {
+    'FR': 'Fresh',
+    'SA': 'Saline',
+    'BR': 'Brackish',
+    'BE': 'Reclaimed',
+    'OT': 'Other',
+    '-nr-': 'Not reported',
+}
+WATER_TYPE_MAPPING_NA = 'N/A'
+
 
 @dataclass_json
 @dataclass
@@ -78,6 +97,31 @@ class GroundwaterWell:
 class ConsumptionOrWithdrawalDatum:
     year: int
     value: float
+    waterSource: List[str]
+    waterType: List[str]
+
+    def __post_init__(self):
+        # Interpret USGS water source values
+        # print(f"waterSource: {self.waterSource}")
+        source_values = []
+        for ws in self.waterSource.split('&'):
+            ws = ws.strip()
+            if ws in WATER_SOURCE_MAPPING:
+                source_values.append(WATER_SOURCE_MAPPING[ws])
+            else:
+                source_values.append(WATER_SOURCE_MAPPING_NA)
+        self.waterSource = source_values
+
+        # Interpret USGS water type values
+        # print(f"waterType: {self.waterType}")
+        source_types = []
+        for wt in self.waterType.split('&'):
+            wt = wt.strip()
+            if wt in WATER_TYPE_MAPPING:
+                source_types.append(WATER_TYPE_MAPPING[wt])
+            else:
+                source_types.append(WATER_TYPE_MAPPING_NA)
+        self.waterType = source_types
 
 
 @dataclass_json
@@ -87,8 +131,6 @@ class PowerPlantDataset:
     eiaLongitude: Decimal
     eiaLatitude: Decimal
     huc12: str = None
-    waterSource: str = None
-    waterType: str = None
     consumptionUnit: Unit = None
     withdrawalUnit: Unit = None
     usgsConsumption: List[ConsumptionOrWithdrawalDatum] = None
