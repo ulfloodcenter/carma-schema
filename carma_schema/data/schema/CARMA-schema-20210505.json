@@ -329,7 +329,7 @@
     },
     "MaxStreamOrder": {
       "type": "integer",
-      "minimum": 1,
+      "minimum": -9,
       "description": "The maximum Strahler order of streams in a geography (unitless)"
     },
 		"MinStreamLevel": {
@@ -364,11 +364,7 @@
         "geometry",
         "area",
         "crops",
-        "developedArea",
-        "maxStreamOrder",
-        "minStreamLevel",
-        "meanAnnualFlow",
-        "recharge"
+        "developedArea"
       ],
       "properties": {
         "id": { "$ref": "#/definitions/HUC12ID" },
@@ -416,7 +412,7 @@
           "uniqueItems": true
         },
         "geometry": {
-          "$ref": "https://geojson.org/schema/Polygon.json"
+          "$ref": "https://geojson.org/schema/MultiPolygon.json"
         }
       }
     },
@@ -425,13 +421,10 @@
       "required": [
         "huc12",
         "county",
+        "geometry",
         "area",
         "crops",
-        "developedArea",
-        "maxStreamOrder",
-        "minStreamLevel",
-        "meanAnnualFlow",
-        "geometry"
+        "developedArea"
       ],
       "properties": {
         "huc12": {
