@@ -107,7 +107,6 @@ class ConsumptionOrWithdrawalDatum:
 
     def __post_init__(self):
         # Interpret USGS water source values
-        # print(f"waterSource: {self.waterSource}")
         source_values = []
         for ws in self.waterSource.split('&'):
             ws = ws.strip()
@@ -118,7 +117,6 @@ class ConsumptionOrWithdrawalDatum:
         self.waterSource = source_values
 
         # Interpret USGS water type values
-        # print(f"waterType: {self.waterType}")
         source_types = []
         for wt in self.waterType.split('&'):
             wt = wt.strip()
