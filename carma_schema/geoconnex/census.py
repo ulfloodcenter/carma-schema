@@ -30,3 +30,7 @@ class County(Entity):
     def parse_fq_id(cls, fq_id: str) -> ShortIDComponents:
         short_id = urlparse(fq_id).path.split('/')[-1]
         return ShortIDComponents(state_fips=short_id[:2], county_fips=short_id[2:])
+
+    @classmethod
+    def get_short_id(cls, fq_id: str) -> str:
+        return urlparse(fq_id).path.split('/')[-1]
