@@ -36,12 +36,12 @@ def get_county_ids(document: dict) -> List[str]:
     return county_list
 
 
-def get_water_use_data_for_county(document: dict, county: str, year: int) -> List[WaterUseDataset]:
+def get_water_use_data_for_county(document: dict, county: str, year: int, entity_type='Water') -> List[WaterUseDataset]:
     wu_datasets = []
     if 'WaterUseDatasets' in document:
         for wud in document['WaterUseDatasets']:
             if 'county' in wud:
-                if wud['county'] == county and wud['year'] == year:
+                if wud['entityType'] == entity_type and wud['county'] == county and wud['year'] == year:
                     d = WaterUseDataset(wud['entityType'],
                                         wud['waterSource'],
                                         wud['waterType'],

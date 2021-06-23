@@ -1,7 +1,6 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 from typing import List
 from uuid import UUID
-from decimal import Decimal
 
 from dataclasses_json import dataclass_json
 
@@ -71,6 +70,33 @@ class WaterUseDataset:
     unit: dict
     huc12: str = None
     county: str = None
+
+    def __getitem__(self, name):
+        return self.__getattribute__(name)
+
+    def asdict(self) -> dict:
+        """
+        Return a dict version of the dataset, with huc12 or county
+        attribute removed if None
+        :return:
+        """
+        wud_dict = asdict(self)
+        if self.county is None:
+            del wud_dict['county']
+        if self.huc12 is None:
+            del wud_dict['huc12']
+        return wud_dict
+
+
+def get_wateruse_dataset_key(w: WaterUseDataset,
+                             override_huc12=None,
+                             override_county=None) -> frozenset:
+    if override_huc12:
+        return frozenset({w.entityType, w.waterSource, w.waterType,
+                          w.sector, w.year, override_huc12})
+    if override_county:
+        return frozenset({w.entityType, w.waterSource, w.waterType,
+                          w.sector, w.year, override_county})
 
 
 @dataclass_json
@@ -148,6 +174,9 @@ class SurfaceWeightsWaSSI:
     w3: float
     w4: float
 
+    def __getitem__(self, name):
+        return self.__getattribute__(name)
+
 
 @dataclass_json
 @dataclass
@@ -178,6 +207,9 @@ class GroundwaterWeightWaSSI:
         else:
             super.__setattr__(self, key, value)
 
+    def __getitem__(self, name):
+        return self.__getattribute__(name)
+
     def accum(self, other):
         self.publicSupply += other.publicSupply
         self.domestic += other.domestic
@@ -192,6 +224,9 @@ class GroundwaterWeightWaSSI:
 @dataclass
 class GroundwaterWeightsWaSSI:
     gw1: GroundwaterWeightWaSSI
+
+    def __getitem__(self, name):
+        return self.__getattribute__(name)
 
 
 @dataclass_json
