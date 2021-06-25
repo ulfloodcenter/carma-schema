@@ -84,6 +84,14 @@
         "N/A"
       ]
     },
+    "WaterSourceWaSSI": {
+      "type": "string",
+      "enum": [
+        "Surface Water",
+        "Groundwater",
+        "All"
+      ]
+    },
     "WaterType": {
       "type": "string",
       "enum": [
@@ -168,8 +176,17 @@
         "countyDisaggregations": {
           "description": "Collection of sub-HUC12, county pairs for disaggregating county-based data.",
           "type": "array",
-          "items":{
+          "items": {
             "$ref": "#/definitions/WaSSI_countyDisaggregation"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "wassiValues": {
+          "description": "Collection of WaSSI values for HUC12 watersheds",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WaSSI_value"
           },
           "minItems": 0,
           "uniqueItems": true
@@ -316,6 +333,39 @@
           "description": "Number of livestock wells in HUC12 / Number of livestock wells in county",
           "minimum": 0
         }
+      }
+    },
+    "WaSSI_value": {
+      "type": "object",
+      "required": [
+        "huc12",
+        "sector",
+        "waterSupplySources",
+        "value"
+      ],
+      "properties": {
+        "huc12": { "$ref": "#/definitions/HUC12ID" },
+        "sector": {
+          "type": "string",
+          "enum": [
+            "All",
+            "Public Supply",
+            "Domestic",
+            "Commercial",
+            "Industrial",
+            "Irrigation",
+            "Total Thermoelectric Power"
+            ]
+        },
+        "waterSupplySources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WaterSourceWaSSI"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "value": { "$ref": "#/definitions/Value" }
       }
     },
 		"URL": {

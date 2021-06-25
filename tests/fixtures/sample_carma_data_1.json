@@ -371,5 +371,146 @@
 			],
 			"geometry": {"type": "MultiPolygon", "coordinates": [[[[-90.56719273910849, 30.643084757618922], [-90.56719273911638, 30.64309475764262], [-90.56718674020803, 30.6444787609383], [-90.56717074348666, 30.648633770828162]]]]}
 		}
+	],
+	"WaterUseDatasets": [
+		{
+      "entityType": "Water",
+      "waterSource": "Surface Water",
+      "waterType": "Fresh",
+      "sector": "Public Supply",
+      "description": "Public Supply self-supplied surface-water withdrawals, fresh, in Mgal/d",
+      "sourceData": "https://waterdata.usgs.gov/la/nwis/water_use?format=rdb&rdb_compression=file&wu_area=County&wu_year=2015&wu_county=055,101,045,001,113,039,097,099",
+      "year": 2015,
+      "value": 0.020264687967877608,
+      "unit": {
+        "name": "Mgal/d",
+        "primaryDimension": "Million",
+        "secondaryDimension": "Gallon",
+        "tertiaryDimension": "Day"
+      },
+      "huc12": "https://geoconnex.us/usgs/hydrologic-unit/080801030109"
+    },
+    {
+      "entityType": "Water",
+      "waterSource": "Surface Water",
+      "waterType": "Saline",
+      "sector": "Public Supply",
+      "description": "Public Supply self-supplied surface-water withdrawals, saline, in Mgal/d",
+      "sourceData": "https://waterdata.usgs.gov/la/nwis/water_use?format=rdb&rdb_compression=file&wu_area=County&wu_year=2015&wu_county=055,101,045,001,113,039,097,099",
+      "year": 2015,
+      "value": 0.0,
+      "unit": {
+        "name": "Mgal/d",
+        "primaryDimension": "Million",
+        "secondaryDimension": "Gallon",
+        "tertiaryDimension": "Day"
+      },
+      "huc12": "https://geoconnex.us/usgs/hydrologic-unit/080801030109"
+    }
+	],
+	"Analyses": [
+		{
+			"WaSSI": [
+				{
+					"id": "2e984b33-5773-46af-b4eb-b7d7e86d6630",
+					"cropYear": 2019,
+					"developedAreaYear": 2016,
+					"groundwaterWellsCompletedYear": 2016,
+					"sectorWeightFactorsSurface": [
+						{
+							"sector": "Irrigation",
+							"factors": [
+								"w1",
+								"w2",
+								"w3"
+							]
+						},
+						{
+							"sector": "Industrial",
+							"factors": [
+								"w1",
+								"w2",
+								"w4"
+							]
+						},
+						{
+							"sector": "Public Supply",
+							"factors": [
+								"w1",
+								"w4"
+							]
+						}
+					],
+					"sectorWeightFactorsGroundwater": [
+						{
+							"sector": "Irrigation",
+							"factors": [
+								"gw1"
+							]
+						},
+						{
+							"sector": "Industrial",
+							"factors": [
+								"gw1"
+							]
+						},
+						{
+							"sector": "Public Supply",
+							"factors": [
+								"gw1"
+							]
+						},
+						{
+							"sector": "Domestic",
+							"factors": [
+								"gw1"
+							]
+						}
+					],
+					"description": "Test 2021-06-21",
+					"countyDisaggregations": [
+						{
+							"huc12": "https://geoconnex.us/usgs/hydrologic-unit/080801030109",
+							"county": "https://geoconnex.us/ref/counties/22055",
+							"surfaceWeights": {
+								"w1": 0.0026771082017483516,
+								"w2": 0.0017713990343709708,
+								"w3": 0.0410958904109589,
+								"w4": 0.032204651494958214
+							},
+							"groundwaterWeights": {
+								"gw1": {
+									"publicSupply": 0.0,
+									"domestic": 0.0019656019656019656,
+									"commercial": 0.003816793893129771,
+									"industrial": 0.0,
+									"powerGeneration": 0.0,
+									"irrigation": 0.0,
+									"livestock": 0.0
+								}
+							}
+						}
+					],
+					"wassiValues": [
+						{
+							"huc12": "https://geoconnex.us/usgs/hydrologic-unit/080801030305",
+							"sector": "Public Supply",
+							"waterSupplySources": [
+								"All"
+							],
+							"value": 0.23
+						},
+						{
+							"huc12": "https://geoconnex.us/usgs/hydrologic-unit/080801030305",
+							"sector": "Public Supply",
+							"waterSupplySources": [
+								"Surface Water"
+							],
+							"value": 0.42
+						}
+					]
+				}
+			]
+		}
 	]
 }
