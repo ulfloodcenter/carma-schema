@@ -254,6 +254,15 @@ class SectorWeightFactorGroundwaterWaSSI:
 
 @dataclass_json
 @dataclass
+class WassiValue:
+    huc12: str
+    sector: str
+    waterSupplySources: List[str]
+    value: float
+
+
+@dataclass_json
+@dataclass
 class AnalysisWaSSI:
     id: UUID
     cropYear: int
@@ -263,3 +272,4 @@ class AnalysisWaSSI:
     sectorWeightFactorsGroundwater: List[SectorWeightFactorGroundwaterWaSSI]
     description: str = None
     countyDisaggregations: List[CountyDisaggregationWaSSI] = None
+    wassiValues: List[WassiValue] = None

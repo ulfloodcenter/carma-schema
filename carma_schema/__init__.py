@@ -22,6 +22,10 @@ DATASET_TYPES = [
 ]
 
 
+class CarmaItemNotFound(Exception):
+    pass
+
+
 def get_huc12_ids(document: dict) -> List[str]:
     huc12_list = []
     if 'HUC12Watersheds' in document:
