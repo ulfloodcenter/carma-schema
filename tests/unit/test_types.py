@@ -9,9 +9,10 @@ from carma_schema.types import *
 class TestTypes(unittest.TestCase):
     def test_analysis_wassi(self):
         id1 = uuid.uuid4()
-        wassi1 = AnalysisWaSSI(id1, 2019, 2016, 2020, description="Test WaSSI analysis 1")
+        wassi1 = AnalysisWaSSI(id1, 2015, 2019, 2016, 2020, description="Test WaSSI analysis 1")
         wassi1_dict = asdict(wassi1)
         self.assertEqual(id1, wassi1_dict['id'])
+        self.assertEqual(2015, wassi1_dict['waterUseYear'])
         self.assertEqual(2019, wassi1_dict['cropYear'])
         self.assertEqual(2016, wassi1_dict['developedAreaYear'])
         self.assertEqual(2020, wassi1_dict['groundwaterWellsCompletedYear'])
@@ -26,10 +27,11 @@ class TestTypes(unittest.TestCase):
                                                    GroundwaterWeightsWaSSI(GroundwaterWeightWaSSI(7.7, 6.6, 5.5, 4.4, 3.3, 2.2, 1.1)))
 
         id2 = uuid.uuid4()
-        wassi2 = AnalysisWaSSI(id2, 2019, 2016, 2020, description="Test WaSSI analysis 2",
+        wassi2 = AnalysisWaSSI(id2, 2015, 2019, 2016, 2020, description="Test WaSSI analysis 2",
                                countyDisaggregations=[county_disagg1, county_disagg2])
         wassi2_dict = asdict(wassi2)
         self.assertEqual(id2, wassi2_dict['id'])
+        self.assertEqual(2015, wassi1_dict['waterUseYear'])
         self.assertEqual(2019, wassi2_dict['cropYear'])
         self.assertEqual(2016, wassi2_dict['developedAreaYear'])
         self.assertEqual(2020, wassi2_dict['groundwaterWellsCompletedYear'])
@@ -128,11 +130,12 @@ class TestTypes(unittest.TestCase):
             SectorWeightFactorGroundwaterWaSSI('Domestic',
                                                ['gw1'])
         ]
-        wassi1 = AnalysisWaSSI(id1, 2019, 2016, 2020,
+        wassi1 = AnalysisWaSSI(id1, 2015, 2019, 2016, 2020,
                                surface_weight_factors,
                                gw_weight_factors)
         wassi1_dict = asdict(wassi1)
         self.assertEqual(id1, wassi1_dict['id'])
+        self.assertEqual(2015, wassi1_dict['waterUseYear'])
         self.assertEqual(2019, wassi1_dict['cropYear'])
         self.assertEqual(2016, wassi1_dict['developedAreaYear'])
         self.assertEqual(2020, wassi1_dict['groundwaterWellsCompletedYear'])

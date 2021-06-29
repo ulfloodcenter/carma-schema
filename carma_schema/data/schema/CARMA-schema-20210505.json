@@ -129,6 +129,7 @@
       "type": "object",
       "required": [
         "id",
+        "waterUseYear",
         "cropYear",
         "developedAreaYear",
         "groundwaterWellsCompletedYear",
@@ -138,6 +139,10 @@
       "properties": {
         "id": {
           "$ref": "#/definitions/UUID"
+        },
+        "waterUseYear": {
+          "description": "Year of water use data used to calculate WaSSI values.",
+          "$ref": "#/definitions/Year"
         },
         "cropYear": {
           "description": "Year of crop data used to generate WaSSI weights.",

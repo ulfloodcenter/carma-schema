@@ -6,7 +6,9 @@ from dataclasses import asdict
 
 import jsonschema
 
-from carma_schema.types import CropData, DevelopedArea, GroundwaterWell, AnalysisWaSSI, WaterUseDataset
+from carma_schema.types import CropData, DevelopedArea, GroundwaterWell, WaterUseDataset, \
+    AnalysisWaSSI, WassiValue, CountyDisaggregationWaSSI, SectorWeightFactorGroundwaterWaSSI, \
+    SectorWeightFactorSurfaceWaSSI
 
 
 DEFINITION_TYPES = [
@@ -94,8 +96,32 @@ def get_wassi_analysis_by_id(document: dict, id: UUID) -> AnalysisWaSSI:
         for a in document['Analyses']:
             if 'WaSSI' in a:
                 for w in a['WaSSI']:
-                    if w['id'] == str(id):
-                        return AnalysisWaSSI.from_dict(w)
+                    if str(w['id']) == str(id):
+                        # Deserialize by hand instead of using AnalysisWaSSI.from_dict as dataclass_json has some bugs
+                        # that prevent this from nested type inference from working correctly
+                        sectorWeightFactorsSurface = None
+                        if 'sectorWeightFactorsSurface' in w and w['sectorWeightFactorsSurface']:
+                            sectorWeightFactorsSurface = tuple((SectorWeightFactorSurfaceWaSSI.from_dict(surf_w) for surf_w in w['sectorWeightFactorsSurface']))
+                        sectorWeightFactorsGroundwater = None
+                        if 'sectorWeightFactorsGroundwater' in w and w['sectorWeightFactorsGroundwater']:
+                            sectorWeightFactorsGroundwater = tuple((SectorWeightFactorGroundwaterWaSSI.from_dict(gw_w) for gw_w in w['sectorWeightFactorsGroundwater']))
+                        countyDisaggregations = None
+                        if 'countyDisaggregations' in w and w['countyDisaggregations']:
+                            countyDisaggregations = [CountyDisaggregationWaSSI.from_dict(disag) for disag in w['countyDisaggregations']]
+                        wassiValues = None
+                        if 'wassiValues' in w and w['wassiValues']:
+                            wassiValues = [WassiValue.from_dict(wv) for wv in w['wassiValues']]
+                        id_to_serialize = w['id']
+                        if isinstance(id_to_serialize, str):
+                            id_to_serialize = UUID(id_to_serialize)
+                        return AnalysisWaSSI(id_to_serialize,
+                                             w['waterUseYear'], w['cropYear'],
+                                             w['developedAreaYear'], w['groundwaterWellsCompletedYear'],
+                                             sectorWeightFactorsSurface=sectorWeightFactorsSurface,
+                                             sectorWeightFactorsGroundwater=sectorWeightFactorsGroundwater,
+                                             description=w['description'],
+                                             countyDisaggregations=countyDisaggregations,
+                                             wassiValues=wassiValues)
     return None
 
 
@@ -104,11 +130,29 @@ def update_wassi_analysis_instance(document: dict, wassi: AnalysisWaSSI) -> bool
         for a in document['Analyses']:
             if 'WaSSI' in a:
                 for w in a['WaSSI']:
-                    if w['id'] == str(wassi.id):
+                    if str(w['id']) == str(wassi.id):
+                        tmp_dict = asdict(wassi)
+                        w['waterUseYear'] = wassi.waterUseYear
                         w['cropYear'] = wassi.cropYear
                         w['developedAreaYear'] = wassi.developedAreaYear
+                        w['groundwaterWellsCompletedYear'] = wassi.groundwaterWellsCompletedYear
+                        if 'sectorWeightFactorsSurface' in tmp_dict and tmp_dict['sectorWeightFactorsSurface']:
+                            w['sectorWeightFactorsSurface'] = [i for i in tmp_dict['sectorWeightFactorsSurface']]
+                        else:
+                            del w['sectorWeightFactorsSurface']
+                        if 'sectorWeightFactorsGroundwater' in tmp_dict and tmp_dict['sectorWeightFactorsGroundwater']:
+                            w['sectorWeightFactorsGroundwater'] = [i for i in tmp_dict['sectorWeightFactorsGroundwater']]
+                        else:
+                            del w['sectorWeightFactorsGroundwater']
                         w['description'] = wassi.description
-                        w['countyDisaggregations'] = asdict(wassi)['countyDisaggregations']
+                        if 'countyDisaggregations' in tmp_dict and tmp_dict['countyDisaggregations']:
+                            w['countyDisaggregations'] = [i for i in tmp_dict['countyDisaggregations']]
+                        else:
+                            del w['countyDisaggregations']
+                        if 'wassiValues' in tmp_dict and tmp_dict['wassiValues']:
+                            w['wassiValues'] = [i for i in tmp_dict['wassiValues']]
+                        else:
+                            del w['wassiValues']
                         return True
     return False
 
