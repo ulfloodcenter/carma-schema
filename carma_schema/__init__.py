@@ -154,22 +154,22 @@ def update_wassi_analysis_instance(document: dict, wassi: AnalysisWaSSI) -> bool
                         w['cropYear'] = wassi.cropYear
                         w['developedAreaYear'] = wassi.developedAreaYear
                         w['groundwaterWellsCompletedYear'] = wassi.groundwaterWellsCompletedYear
+                        w['description'] = wassi.description
                         if 'sectorWeightFactorsSurface' in tmp_dict and tmp_dict['sectorWeightFactorsSurface']:
                             w['sectorWeightFactorsSurface'] = [i for i in tmp_dict['sectorWeightFactorsSurface']]
-                        else:
+                        elif 'sectorWeightFactorsSurface' in w:
                             del w['sectorWeightFactorsSurface']
                         if 'sectorWeightFactorsGroundwater' in tmp_dict and tmp_dict['sectorWeightFactorsGroundwater']:
                             w['sectorWeightFactorsGroundwater'] = [i for i in tmp_dict['sectorWeightFactorsGroundwater']]
-                        else:
+                        elif 'sectorWeightFactorsGroundwater' in w:
                             del w['sectorWeightFactorsGroundwater']
-                        w['description'] = wassi.description
                         if 'countyDisaggregations' in tmp_dict and tmp_dict['countyDisaggregations']:
                             w['countyDisaggregations'] = [i for i in tmp_dict['countyDisaggregations']]
-                        else:
+                        elif 'countyDisaggregations' in w:
                             del w['countyDisaggregations']
                         if 'wassiValues' in tmp_dict and tmp_dict['wassiValues']:
                             w['wassiValues'] = [i for i in tmp_dict['wassiValues']]
-                        else:
+                        elif 'wassiValues' in w:
                             del w['wassiValues']
                         return True
     return False
