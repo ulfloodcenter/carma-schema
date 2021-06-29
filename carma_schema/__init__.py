@@ -1,6 +1,6 @@
 import json
 from collections import Counter
-from typing import List
+from typing import List, Iterator
 from uuid import UUID
 from dataclasses import asdict
 
@@ -58,6 +58,24 @@ def get_water_use_data_for_county(document: dict, county: str, year: int, entity
                                         county=county)
                     wu_datasets.append(d)
     return wu_datasets
+
+
+def get_water_use_data_for_huc12(document: dict, huc12_id: str, year: int, entity_type='Water') \
+        -> Iterator[WaterUseDataset]:
+    if 'WaterUseDatasets' in document:
+        for wud in document['WaterUseDatasets']:
+            if 'county' in wud:
+                if wud['entityType'] == entity_type and wud['huc12'] == huc12_id and wud['year'] == year:
+                    yield WaterUseDataset(wud['entityType'],
+                                          wud['waterSource'],
+                                          wud['waterType'],
+                                          wud['sector'],
+                                          wud['description'],
+                                          wud['sourceData'],
+                                          year,
+                                          wud['value'],
+                                          wud['unit'],
+                                          huc12=huc12_id)
 
 
 def get_crop_data_for_entity(entity: dict, year: int) -> CropData:
