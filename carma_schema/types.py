@@ -1,5 +1,5 @@
 from dataclasses import dataclass, asdict
-from typing import List
+from typing import List, Tuple
 from uuid import UUID
 
 from dataclasses_json import dataclass_json
@@ -244,12 +244,35 @@ class SectorWeightFactorSurfaceWaSSI:
     sector: str
     factors: List[str]
 
+    @classmethod
+    def get_default_factors(cls) -> Tuple:
+        return (
+            SectorWeightFactorSurfaceWaSSI('Irrigation',
+                                           ['w1', 'w2', 'w3']),
+            SectorWeightFactorSurfaceWaSSI('Industrial',
+                                           ['w1', 'w2', 'w4']),
+            SectorWeightFactorSurfaceWaSSI('Public Supply',
+                                           ['w1', 'w4'])
+        )
 
 @dataclass_json
 @dataclass
 class SectorWeightFactorGroundwaterWaSSI:
     sector: str
     factors: List[str]
+
+    @classmethod
+    def get_default_factors(cls) -> Tuple:
+        return (
+            SectorWeightFactorGroundwaterWaSSI('Irrigation',
+                                               ['gw1']),
+            SectorWeightFactorGroundwaterWaSSI('Industrial',
+                                               ['gw1']),
+            SectorWeightFactorGroundwaterWaSSI('Public Supply',
+                                               ['gw1']),
+            SectorWeightFactorGroundwaterWaSSI('Domestic',
+                                               ['gw1'])
+        )
 
 
 @dataclass_json
@@ -265,11 +288,27 @@ class WassiValue:
 @dataclass
 class AnalysisWaSSI:
     id: UUID
+    waterUseYear: int
     cropYear: int
     developedAreaYear: int
     groundwaterWellsCompletedYear: int
-    sectorWeightFactorsSurface: List[SectorWeightFactorSurfaceWaSSI]
-    sectorWeightFactorsGroundwater: List[SectorWeightFactorGroundwaterWaSSI]
+    sectorWeightFactorsSurface: Tuple[SectorWeightFactorSurfaceWaSSI] = None
+    sectorWeightFactorsGroundwater: Tuple[SectorWeightFactorGroundwaterWaSSI] = None
     description: str = None
     countyDisaggregations: List[CountyDisaggregationWaSSI] = None
     wassiValues: List[WassiValue] = None
+
+    def __init__(self, id, waterUseYear, cropYear, developedAreaYear, groundwaterWellsCompletedYear,
+                 sectorWeightFactorsSurface=SectorWeightFactorSurfaceWaSSI.get_default_factors(),
+                 sectorWeightFactorsGroundwater=SectorWeightFactorGroundwaterWaSSI.get_default_factors(),
+                 description=None, countyDisaggregations=None, wassiValues=None):
+        self.id = id
+        self.waterUseYear = waterUseYear
+        self.cropYear = cropYear
+        self.developedAreaYear = developedAreaYear
+        self.groundwaterWellsCompletedYear = groundwaterWellsCompletedYear
+        self.sectorWeightFactorsSurface = sectorWeightFactorsSurface
+        self.sectorWeightFactorsGroundwater = sectorWeightFactorsGroundwater
+        self.description = description
+        self.countyDisaggregations = countyDisaggregations
+        self.wassiValues = wassiValues
