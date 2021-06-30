@@ -66,7 +66,7 @@ def get_water_use_data_for_huc12(document: dict, huc12_id: str, year: int, entit
         -> Iterator[WaterUseDataset]:
     if 'WaterUseDatasets' in document:
         for wud in document['WaterUseDatasets']:
-            if 'county' in wud:
+            if 'huc12' in wud:
                 if wud['entityType'] == entity_type and wud['huc12'] == huc12_id and wud['year'] == year:
                     yield WaterUseDataset(wud['entityType'],
                                           wud['waterSource'],
