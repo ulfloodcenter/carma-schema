@@ -280,7 +280,7 @@ class SectorWeightFactorGroundwaterWaSSI:
 class WassiValue:
     huc12: str
     sector: str
-    waterSupplySources: List[str]
+    waterSupplySource: str
     value: float
 
 
