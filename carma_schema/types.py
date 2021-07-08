@@ -312,3 +312,18 @@ class AnalysisWaSSI:
         self.description = description
         self.countyDisaggregations = countyDisaggregations
         self.wassiValues = wassiValues
+
+    def asdict(self) -> dict:
+        """
+        Return a dict version of the dataset, with optional values
+        attribute removed if None
+        :return:
+        """
+        wassi_dict = asdict(self)
+        if self.description is None:
+            del wassi_dict['description']
+        if self.countyDisaggregations is None:
+            del wassi_dict['countyDisaggregations']
+        if self.wassiValues is None:
+            del wassi_dict['wassiValues']
+        return wassi_dict
