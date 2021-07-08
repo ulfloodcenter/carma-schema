@@ -362,14 +362,7 @@
             "Total Thermoelectric Power"
             ]
         },
-        "waterSupplySources": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/WaterSourceWaSSI"
-          },
-          "minItems": 1,
-          "uniqueItems": true
-        },
+        "waterSupplySource": { "$ref": "#/definitions/WaterSourceWaSSI" },
         "value": { "$ref": "#/definitions/Value" }
       }
     },
