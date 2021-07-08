@@ -41,6 +41,10 @@ WATER_TYPE_MAPPING = {
 }
 WATER_TYPE_MAPPING_NA = 'N/A'
 
+WASSI_SECTOR_ALL = 'All'
+WASSI_SOURCE_ALL = 'All'
+WASSI_SOURCE_SURF = 'Surface Water'
+WASSI_SOURCE_GW = 'Groundwater'
 
 @dataclass_json
 @dataclass
