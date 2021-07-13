@@ -3,6 +3,7 @@ from collections import Counter
 from typing import List, Iterator
 from uuid import UUID
 from dataclasses import asdict
+import mmap
 
 import jsonschema
 
@@ -185,8 +186,9 @@ def validate(schema_path: str, document_path: str) -> (bool, dict):
         schema = json.load(f)
     
     document = None
-    with open(document_path, 'r') as f:
-        document = json.load(f)
+    with open(document_path, 'rb') as f:
+        with mmap.mmap(f.fileno(), length=0, access=mmap.ACCESS_READ) as mm:
+            document = json.load(mm)
 
     errors = []
     validator = jsonschema.Draft7Validator(schema)
