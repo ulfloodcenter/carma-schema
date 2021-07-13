@@ -63,6 +63,21 @@ def get_water_use_data_for_county(document: dict, county: str, year: int, entity
     return wu_datasets
 
 
+def join_wassi_values_to_huc12_geojson(wassi_analysis: AnalysisWaSSI, huc12_geojson: dict) -> dict:
+    huc12_id = huc12_geojson['properties']['id']
+    wassi_match = False
+    for wassi_value in wassi_analysis.wassiValues:
+        if wassi_value.huc12 == huc12_id:
+            wassi_key = f"wassi_sector_{wassi_value.sector}_source_{wassi_value.waterSupplySource}"
+            value = wassi_value.value
+            huc12_geojson['properties'][wassi_key] = value
+            wassi_match = True
+    if wassi_match:
+        huc12_geojson['properties']['wassi_year'] = wassi_analysis.waterUseYear
+        huc12_geojson['properties']['wassi_id'] = str(wassi_analysis.id)
+    return huc12_geojson
+
+
 def get_water_use_data_for_huc12(document: dict, huc12_id: str, year: int, entity_type='Water') \
         -> Iterator[WaterUseDataset]:
     if 'WaterUseDatasets' in document:

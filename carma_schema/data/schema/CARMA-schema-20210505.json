@@ -345,7 +345,7 @@
       "required": [
         "huc12",
         "sector",
-        "waterSupplySources",
+        "waterSupplySource",
         "value"
       ],
       "properties": {
