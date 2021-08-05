@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://floodcenter.louisiana.edu/CARMA.schema.20210505.json",
+  "$id": "https://floodcenter.louisiana.edu/CARMA.schema.20210805.json",
   "title": "CARMA schema",
   "description": "Data schema for Coastal Aquifer Research and Management Analytics (CARMA) Platform",
   "type": "object",
@@ -815,7 +815,9 @@
             "Livestock (Animal Specialties)",
             "Aquaculture",
             "Irrigation, Total",
+            "Irrigation, Sprinkler",
             "Irrigation, Crop",
+            "Irrigation, Microirrigation",
             "Irrigation, Golf Courses",
             "Hydroelectric Power",
             "Wastewater Treatment"

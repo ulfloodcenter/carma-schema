@@ -496,13 +496,13 @@
 						{
 							"huc12": "https://geoconnex.us/usgs/hydrologic-unit/080801030305",
 							"sector": "Public Supply",
-							"waterSupplySources": "All",
+							"waterSupplySource": "All",
 							"value": 0.23
 						},
 						{
 							"huc12": "https://geoconnex.us/usgs/hydrologic-unit/080801030305",
 							"sector": "Public Supply",
-							"waterSupplySources": "Surface Water",
+							"waterSupplySource": "Surface Water",
 							"value": 0.42
 						}
 					]

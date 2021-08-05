@@ -193,7 +193,7 @@
 			"state": "Louisiana",
 			"county": "Caldwell",
 			"area": 1400.4812596,
-			"maxStreamOrder": -3,
+			"maxStreamOrder": -10,
 			"minStreamLevel": 1,
 			"meanAnnualFlow": 34.747,
 			"population": [
@@ -234,7 +234,7 @@
 			"developedArea": [
 				{
 					"year": 2016,
-					"area": 456.22441334
+					"area": -456.22441334
 				}
 			],
 			"geometry": {"type": "MultiPolygon", "coordinates": [[[[-90.56719273910849, 30.643084757618922], [-90.56719273911638, 30.64309475764262], [-90.56718674020803, 30.6444787609383], [-90.56717074348666, 30.648633770828162]]]]}
