@@ -47,6 +47,7 @@ WASSI_SECTOR_IND = 'Industrial'
 WASSI_SECTOR_PUB = 'Public Supply'
 WASSI_SECTOR_PWR = 'Total Thermoelectric Power'
 WASSI_SECTOR_DOM = 'Domestic'
+WASSI_SECTOR_LVS = 'Livestock'
 WASSI_SOURCE_ALL = 'All'
 WASSI_SOURCE_SURF = 'Surface Water'
 WASSI_SOURCE_GW = 'Groundwater'
@@ -261,7 +262,9 @@ class SectorWeightFactorSurfaceWaSSI:
             SectorWeightFactorSurfaceWaSSI('Industrial',
                                            ['w1', 'w2', 'w4']),
             SectorWeightFactorSurfaceWaSSI('Public Supply',
-                                           ['w1', 'w4'])
+                                           ['w1', 'w4']),
+            SectorWeightFactorSurfaceWaSSI('Livestock',
+                                           ['w1', 'w2', 'w3'])
         )
 
 @dataclass_json
@@ -280,6 +283,8 @@ class SectorWeightFactorGroundwaterWaSSI:
             SectorWeightFactorGroundwaterWaSSI('Public Supply',
                                                ['gw1']),
             SectorWeightFactorGroundwaterWaSSI('Domestic',
+                                               ['gw1']),
+            SectorWeightFactorGroundwaterWaSSI('Livestock',
                                                ['gw1'])
         )
 
