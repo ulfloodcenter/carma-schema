@@ -79,7 +79,8 @@ def join_wassi_values_to_huc12(wassi_analysis: AnalysisWaSSI, huc12_properties: 
 
 
 def join_wassi_values_to_huc12_geojson(wassi_analysis: AnalysisWaSSI, huc12_geojson: dict) -> dict:
-    return join_wassi_values_to_huc12(wassi_analysis, huc12_geojson['properties'])
+    join_wassi_values_to_huc12(wassi_analysis, huc12_geojson['properties'])
+    return huc12_geojson
 
 
 def get_water_use_data_for_huc12(document: dict, huc12_id: str, year: int, entity_type='Water') \

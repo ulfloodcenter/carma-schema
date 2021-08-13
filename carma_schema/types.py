@@ -257,13 +257,13 @@ class SectorWeightFactorSurfaceWaSSI:
     @classmethod
     def get_default_factors(cls) -> Tuple:
         return (
-            SectorWeightFactorSurfaceWaSSI('Irrigation',
+            SectorWeightFactorSurfaceWaSSI(WASSI_SECTOR_IRR,
                                            ['w1', 'w2', 'w3']),
-            SectorWeightFactorSurfaceWaSSI('Industrial',
+            SectorWeightFactorSurfaceWaSSI(WASSI_SECTOR_IND,
                                            ['w1', 'w2', 'w4']),
-            SectorWeightFactorSurfaceWaSSI('Public Supply',
+            SectorWeightFactorSurfaceWaSSI(WASSI_SECTOR_PUB,
                                            ['w1', 'w4']),
-            SectorWeightFactorSurfaceWaSSI('Livestock',
+            SectorWeightFactorSurfaceWaSSI(WASSI_SECTOR_LVS,
                                            ['w1', 'w2', 'w3'])
         )
 
@@ -276,15 +276,15 @@ class SectorWeightFactorGroundwaterWaSSI:
     @classmethod
     def get_default_factors(cls) -> Tuple:
         return (
-            SectorWeightFactorGroundwaterWaSSI('Irrigation',
+            SectorWeightFactorGroundwaterWaSSI(WASSI_SECTOR_IRR,
                                                ['gw1']),
-            SectorWeightFactorGroundwaterWaSSI('Industrial',
+            SectorWeightFactorGroundwaterWaSSI(WASSI_SECTOR_IND,
                                                ['gw1']),
-            SectorWeightFactorGroundwaterWaSSI('Public Supply',
+            SectorWeightFactorGroundwaterWaSSI(WASSI_SECTOR_PUB,
                                                ['gw1']),
-            SectorWeightFactorGroundwaterWaSSI('Domestic',
+            SectorWeightFactorGroundwaterWaSSI(WASSI_SECTOR_DOM,
                                                ['gw1']),
-            SectorWeightFactorGroundwaterWaSSI('Livestock',
+            SectorWeightFactorGroundwaterWaSSI(WASSI_SECTOR_LVS,
                                                ['gw1'])
         )
 
