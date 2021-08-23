@@ -653,7 +653,8 @@
             "Active",
             "Abandoned",
             "Destroyed",
-            "Inactive"
+            "Inactive",
+            "Unknown"
           ]
         },
         "yearCompleted": {
@@ -858,7 +859,9 @@
         "Industrial",
         "Power Generation",
         "Irrigation",
-        "Livestock"
+        "Livestock",
+        "Aquaculture",
+        "Fire"
       ]
     },
     "Unit": {

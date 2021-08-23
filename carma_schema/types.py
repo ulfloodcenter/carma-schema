@@ -260,7 +260,7 @@ class SectorWeightFactorSurfaceWaSSI:
             SectorWeightFactorSurfaceWaSSI(WASSI_SECTOR_IRR,
                                            ['w1', 'w2', 'w3']),
             SectorWeightFactorSurfaceWaSSI(WASSI_SECTOR_IND,
-                                           ['w1', 'w2', 'w4']),
+                                           ['w1', 'w3', 'w4']),
             SectorWeightFactorSurfaceWaSSI(WASSI_SECTOR_PUB,
                                            ['w1', 'w4']),
             SectorWeightFactorSurfaceWaSSI(WASSI_SECTOR_LVS,
