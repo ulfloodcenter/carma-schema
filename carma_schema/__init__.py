@@ -9,7 +9,7 @@ import jsonschema
 
 from carma_schema.types import CropData, DevelopedArea, GroundwaterWell, WaterUseDataset, \
     AnalysisWaSSI, WassiValue, CountyDisaggregationWaSSI, SectorWeightFactorGroundwaterWaSSI, \
-    SectorWeightFactorSurfaceWaSSI
+    SectorWeightFactorSurfaceWaSSI, WASSI_SECTOR_ALL, WASSI_SOURCE_ALL, WASSI_SOURCE_ANY
 
 
 DEFINITION_TYPES = [
@@ -43,23 +43,27 @@ def get_county_ids(document: dict) -> List[str]:
     return county_list
 
 
-def get_water_use_data_for_county(document: dict, county: str, year: int, entity_type='Water') -> List[WaterUseDataset]:
+def get_water_use_data_for_county(document: dict, county: str, year: int, entity_type='Water',
+                                  exclude_summary_data=False) -> List[WaterUseDataset]:
     wu_datasets = []
     if 'WaterUseDatasets' in document:
         for wud in document['WaterUseDatasets']:
             if 'county' in wud:
                 if wud['entityType'] == entity_type and wud['county'] == county and wud['year'] == year:
-                    d = WaterUseDataset(wud['entityType'],
-                                        wud['waterSource'],
-                                        wud['waterType'],
-                                        wud['sector'],
-                                        wud['description'],
-                                        wud['sourceData'],
-                                        year,
-                                        wud['value'],
-                                        wud['unit'],
-                                        county=county)
-                    wu_datasets.append(d)
+                    if not exclude_summary_data or \
+                        (wud['sector'] != WASSI_SECTOR_ALL and wud['waterSource'] != WASSI_SOURCE_ALL and \
+                         wud['waterType'] != WASSI_SOURCE_ANY):
+                        d = WaterUseDataset(wud['entityType'],
+                                            wud['waterSource'],
+                                            wud['waterType'],
+                                            wud['sector'],
+                                            wud['description'],
+                                            wud['sourceData'],
+                                            year,
+                                            wud['value'],
+                                            wud['unit'],
+                                            county=county)
+                        wu_datasets.append(d)
     return wu_datasets
 
 

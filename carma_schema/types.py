@@ -51,6 +51,8 @@ WASSI_SECTOR_LVS = 'Livestock'
 WASSI_SOURCE_ALL = 'All'
 WASSI_SOURCE_SURF = 'Surface Water'
 WASSI_SOURCE_GW = 'Groundwater'
+WASSI_SOURCE_ANY = 'Any'
+
 
 @dataclass_json
 @dataclass
@@ -66,6 +68,7 @@ DEFAULT_USAGE_CONSUMPTION_UNIT = Unit("Mgal/d",
                                       "Gallon",
                                       "Day")
 
+
 @dataclass_json
 @dataclass
 class WaterUseDataset:
@@ -80,6 +83,11 @@ class WaterUseDataset:
     unit: dict
     huc12: str = None
     county: str = None
+
+    def __hash__(self):
+        return hash((self.entityType, self.waterSource, self.waterType,
+                     self.sector, self.description, self.sourceData,
+                     self.year, self.value, str(self.unit), self.huc12, self.county))
 
     def __getitem__(self, name):
         return self.__getattribute__(name)
