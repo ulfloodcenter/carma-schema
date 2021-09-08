@@ -12,7 +12,8 @@ WELL_SECTORS = [
     "Industrial",
     "Power Generation",
     "Irrigation",
-    "Livestock"
+    "Livestock",
+    "Mining"
 ]
 
 WELL_STATUS = [
@@ -48,6 +49,7 @@ WASSI_SECTOR_PUB = 'Public Supply'
 WASSI_SECTOR_PWR = 'Total Thermoelectric Power'
 WASSI_SECTOR_DOM = 'Domestic'
 WASSI_SECTOR_LVS = 'Livestock'
+WASSI_SECTOR_MIN = 'Mining'
 WASSI_SOURCE_ALL = 'All'
 WASSI_SOURCE_SURF = 'Surface Water'
 WASSI_SOURCE_GW = 'Groundwater'
@@ -206,6 +208,7 @@ class GroundwaterWeightWaSSI:
     powerGeneration: float = 0.0
     irrigation: float = 0.0
     livestock: float = 0.0
+    mining: float = 0.0
 
     def __setitem__(self, key, value):
         if key == WELL_SECTORS[0]:
@@ -222,6 +225,8 @@ class GroundwaterWeightWaSSI:
             self.irrigation = value
         elif key == WELL_SECTORS[6]:
             self.livestock = value
+        elif key == WELL_SECTORS[7]:
+            self.mining = value
         else:
             super.__setattr__(self, key, value)
 
@@ -236,6 +241,7 @@ class GroundwaterWeightWaSSI:
         self.powerGeneration += other.powerGeneration
         self.irrigation += other.irrigation
         self.livestock += other.livestock
+        self.mining += other.livestock
 
 
 @dataclass_json
@@ -272,7 +278,9 @@ class SectorWeightFactorSurfaceWaSSI:
             SectorWeightFactorSurfaceWaSSI(WASSI_SECTOR_PUB,
                                            ['w1', 'w4']),
             SectorWeightFactorSurfaceWaSSI(WASSI_SECTOR_LVS,
-                                           ['w1', 'w2', 'w3'])
+                                           ['w1', 'w2', 'w3']),
+            SectorWeightFactorSurfaceWaSSI(WASSI_SECTOR_MIN,
+                                           ['w1', 'w3', 'w4'])
         )
 
 @dataclass_json
@@ -293,6 +301,8 @@ class SectorWeightFactorGroundwaterWaSSI:
             SectorWeightFactorGroundwaterWaSSI(WASSI_SECTOR_DOM,
                                                ['gw1']),
             SectorWeightFactorGroundwaterWaSSI(WASSI_SECTOR_LVS,
+                                               ['gw1']),
+            SectorWeightFactorGroundwaterWaSSI(WASSI_SECTOR_MIN,
                                                ['gw1'])
         )
 

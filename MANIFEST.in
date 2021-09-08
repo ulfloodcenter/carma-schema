@@ -1,2 +1,3 @@
 include carma_schema/data/schema/CARMA-schema-20210505.json
 include carma_schema/data/schema/CARMA-schema-20210805.json
+include carma_schema/data/schema/CARMA-schema-20210908.json

@@ -72,7 +72,7 @@ def join_wassi_values_to_huc12(wassi_analysis: AnalysisWaSSI, huc12_properties: 
     wassi_match = False
     for wassi_value in wassi_analysis.wassiValues:
         if wassi_value.huc12 == huc12_id:
-            wassi_key = f"wassi_sector_{wassi_value.sector}_source_{wassi_value.waterSupplySource}"
+            wassi_key = f"wassi_sector_{wassi_value.sector.replace(' ', '')}_source_{wassi_value.waterSupplySource.replace(' ', '')}"
             value = wassi_value.value
             huc12_properties[wassi_key] = value
             wassi_match = True
